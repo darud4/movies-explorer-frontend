@@ -29,16 +29,6 @@
   margin-top: 26px;
 }
 
-.about-project__title {
-  font-size: 22px;
-  font-weight: 400;
-  line-height: 27px;
-  display: inline-block;
-  width: 100%;
-  border-bottom: 1px solid black;
-  padding-bottom: 23px;
-}
-
 .time {
   display: grid;
   grid-template-columns: 1fr 4fr;
