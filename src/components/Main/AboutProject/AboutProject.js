@@ -13,11 +13,11 @@ function AboutProject() {
                 <p className="about-project__caption">У каждого этапа был мягкий и жёсткий дедлайн, которые нужно было соблюдать, чтобы успешно защититься.</p>
             </li>
         </ul>
-        <div className="about-project__time">
-            <div className="about-project__time-backend">1 неделя</div>
-            <div className="about-project__time-frontend">4 недели</div>
-            <div className="about-project__time-backend-caption">Back-end</div>
-            <div className="about-project__time-frontend-caption">Front-end</div>
+        <div className="time">
+            <div className="time__bar time__bar_green">1 неделя</div>
+            <div className="time__bar">4 недели</div>
+            <div className="time__caption">Back-end</div>
+            <div className="time__caption">Front-end</div>
         </div>
 
     </div>)

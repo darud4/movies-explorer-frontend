@@ -1,1 +1,70 @@
-.about-project {}
+.about-project {
+  padding: 110px 70px 44px;
+}
+
+.about-project__texts {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  gap: 40px;
+  margin-top: 70px;
+  padding-bottom: 110px;
+}
+
+.about-project__subtitle {
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 24px;
+  margin: 0;
+  padding: 0;
+}
+
+.about-project__caption {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  margin: 0;
+  padding: 0;
+  margin-top: 26px;
+}
+
+.about-project__title {
+  font-size: 22px;
+  font-weight: 400;
+  line-height: 27px;
+  display: inline-block;
+  width: 100%;
+  border-bottom: 1px solid black;
+  padding-bottom: 23px;
+}
+
+.time {
+  display: grid;
+  grid-template-columns: 1fr 4fr;
+}
+
+.time__bar {
+  display: flex;
+  background-color: rgba(242, 242, 242, 1);
+  height: 36px;
+  justify-content: center;
+  align-items: center;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 17px;
+}
+.time__bar_green {
+  background-color: rgba(43, 224, 128, 1);
+}
+
+.time__caption {
+  color: rgba(160, 160, 160, 1);
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  height: 36px;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 17px;
+}
