@@ -7,6 +7,7 @@
   margin-top: 66px;
   grid-template-areas: "name photo" "about photo" "bio photo" "contacts photo";
   grid-template-columns: 600px auto;
+  grid-template-rows: repeat(3, auto) 1fr;
 }
 
 .about-me__name {
