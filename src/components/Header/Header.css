@@ -1,0 +1,27 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  padding: 18px 70px;
+  background-color: #5c5c5c;
+}
+
+.header__nav {
+  display: flex;
+  gap: 30px;
+}
+
+.header__action {
+  text-decoration: none;
+  color: white;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 16px;
+  padding: 8px 20px;
+  display: flex;
+  align-items: center;
+}
+
+.header__action_green {
+  background-color: rgba(43, 224, 128, 1);
+  border-radius: 3px;
+}
