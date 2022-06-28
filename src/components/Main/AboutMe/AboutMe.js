@@ -1,6 +1,7 @@
 import './AboutMe.css';
 import '../Main.css';
 import Title from '../Title/Title';
+import photo from '../../../images/photo.jpg';
 
 function AboutMe() {
     return <section className="about-me">
@@ -16,7 +17,7 @@ function AboutMe() {
                     <a href="http://facebook.com" className="about-me__contact">Facebook</a></li>
                 <li><a href="http://github.com" className="about-me__contact">Github</a></li>
             </ul>
-            <img src='#' alt="Фото студента" className="about-me__photo" />
+            <img src={photo} alt="Фото студента" className="about-me__photo" />
         </div>
     </section>
 

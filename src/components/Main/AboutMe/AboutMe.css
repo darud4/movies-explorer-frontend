@@ -24,6 +24,7 @@
   line-height: 20px;
   grid-area: about;
   margin: 0;
+  padding-top: 18px;
 }
 
 .about-me__bio {
@@ -32,6 +33,7 @@
   line-height: 22px;
   grid-area: bio;
   margin: 0;
+  padding-top: 26px;
 }
 
 .about-me__contacts {
@@ -57,4 +59,9 @@
   height: 307px;
   grid-area: photo;
   justify-self: end;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid white;
 }
