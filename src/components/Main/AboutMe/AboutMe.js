@@ -1,9 +1,10 @@
 import './AboutMe.css';
 import '../Main.css';
+import Title from '../Title/Title';
 
 function AboutMe() {
     return <section className="about-me">
-        <h2 className="main__title">Студент</h2>
+        <Title text="Студент" />
         <div className="about-me__person">
             <h3 className="about-me__name">Павел</h3>
             <p className="about-me__about">Начинающий веб-разработчик, 42 года</p>
