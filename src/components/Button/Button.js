@@ -1,7 +1,7 @@
 import './Button.css';
 
 function Button({ caption }) {
-    return <button className="button">{caption}</button>
+    return <button className="button" type="button">{caption}</button>
 
 }
 
