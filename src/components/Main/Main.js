@@ -5,10 +5,12 @@ import Techs from './Techs/Techs';
 import AboutMe from './AboutMe/AboutMe';
 import Portfolio from './Portfolio/Portfolio';
 import Profile from '../Profile/Profile';
+import Login from '../Login/Login';
 
 function Main() {
     return <section className="main">
         <Promo />
+        <Login />
         <Profile />
         <AboutProject />
         <Techs />
