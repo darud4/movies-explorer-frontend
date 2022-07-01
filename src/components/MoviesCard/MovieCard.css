@@ -1,0 +1,52 @@
+.movie-card {
+  display: grid;
+  grid-template-areas: "image image" "name like" "duration duration";
+  grid-template-columns: auto min-content;
+  row-gap: 10px;
+  column-gap: 20px;
+  width: 270px;
+}
+
+.movie-card__image {
+  grid-area: image;
+  object-fit: cover;
+  object-position: center;
+  width: 100%;
+}
+
+.movie-card__name {
+  grid-area: name;
+  padding-top: 5px;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 16px;
+  min-height: 36px;
+}
+
+.movie-card__duration {
+  grid-area: duration;
+  margin: 0;
+  margin-top: 3px;
+  font-size: 11px;
+  font-weight: 400;
+  line-height: 13px;
+  color: rgba(160, 160, 160, 1);
+  padding-top: 6px;
+  border-top: 1px solid rgba(232, 232, 232, 1);
+}
+
+.movie-card__like {
+  grid-area: like;
+  align-self: start;
+  width: 24px;
+  height: 25px;
+  border-radius: 50%;
+  background-color: rgba(249, 249, 249, 1);
+  background-image: url(../../images/icon-like.png);
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.movie-card__like_active {
+  background-image: url(../../images/icon-like-active.png);
+}
