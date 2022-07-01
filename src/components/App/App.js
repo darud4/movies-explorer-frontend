@@ -1,3 +1,4 @@
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import './App.css';
 import Main from '../Main/Main';
 import Footer from '../Footer/Footer';
@@ -8,14 +9,15 @@ import Page404 from '../Page404/Page404';
 
 function App() {
   return (
-    <div className="page">
-      <Page404 />
-      <Header />
-      <MovieCardList />
-      <SearchForm />
-      <Main />
-      <Footer />
-    </div>
+    <BrowserRouter>
+      <div className="page">
+        <Routes>
+          <Route path='/' element={Main}></Route>
+          
+          <Route path="*" element={Page404} />
+        </Routes>
+      </div>
+    </BrowserRouter>
   );
 }
 
