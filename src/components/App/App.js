@@ -7,6 +7,7 @@ import Movies from '../Movies/Movies';
 import Login from '../Login/Login';
 import Register from '../Register/Register';
 import Page404 from '../Page404/Page404';
+import Profile from '../Profile/Profile';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <Route path='/signin' element={<Login />} />
           <Route path='/signup' element={<Register />} />
           <Route path='/movies' element={<><Header /><Movies /><Footer /></>} />
+          <Route path='/profile' element={<><Header /><Profile /></>} />
 
           <Route path="*" element={<Page404 />} />
         </Routes>
