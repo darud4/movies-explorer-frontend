@@ -32,6 +32,7 @@
   font-weight: 400;
   line-height: 17px;
   background-color: rgba(249, 249, 249, 1);
+  width: 100%;
 }
 
 .search-form__input:placeholder {
