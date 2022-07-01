@@ -4,8 +4,8 @@ import Main from '../Main/Main';
 import Footer from '../Footer/Footer';
 import Header from '../Header/Header';
 import Movies from '../Movies/Movies';
-import SearchForm from '../Movies/SearchForm/SearchForm';
-import MovieCardList from '../MoviesCardList/MovieCardList';
+import Login from '../Login/Login';
+import Register from '../Register/Register';
 import Page404 from '../Page404/Page404';
 
 function App() {
@@ -14,6 +14,8 @@ function App() {
       <div className="page">
         <Routes>
           <Route path='/' element={<><Header /><Main /><Footer /></>} />
+          <Route path='/signin' element={<Login />} />
+          <Route path='/signup' element={<Register />} />
           <Route path='/movies' element={<><Header /><Movies /><Footer /></>} />
 
           <Route path="*" element={<Page404 />} />
