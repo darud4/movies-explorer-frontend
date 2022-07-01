@@ -12,9 +12,9 @@ function App() {
     <BrowserRouter>
       <div className="page">
         <Routes>
-          <Route path='/' element={Main}></Route>
-          
-          <Route path="*" element={Page404} />
+          <Route path='/' element={<Main />} />
+
+          <Route path="*" element={<Page404 />} />
         </Routes>
       </div>
     </BrowserRouter>
