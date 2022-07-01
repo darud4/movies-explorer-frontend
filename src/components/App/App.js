@@ -3,13 +3,13 @@ import Main from '../Main/Main';
 import Footer from '../Footer/Footer';
 import Header from '../Header/Header';
 import SearchForm from '../Movies/SearchForm/SearchForm';
-import MovieCard from '../MoviesCard/MovieCard';
+import MovieCardList from '../MoviesCardList/MovieCardList';
 
 function App() {
   return (
     <div className="page">
       <Header />
-      <MovieCard />
+      <MovieCardList />
       <SearchForm />
       <Main />
       <Footer />

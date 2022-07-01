@@ -4,7 +4,7 @@
   grid-template-columns: auto min-content;
   row-gap: 10px;
   column-gap: 20px;
-  width: 270px;
+  width: 100%;
 }
 
 .movie-card__image {
