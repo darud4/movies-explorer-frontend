@@ -11,11 +11,13 @@ function SearchForm() {
     }
 
     return <form className="search-form">
-        <fieldset className="search-form__container">
-            <input type="text" className="search-form__input" />
-            <button className="search-form__submit">Найти</button>
-        </fieldset>
-        <FilterCheckbox checked={isChecked} caption="Короткометражки" onChange={handleChange} />
+        <div className="search-form__outer-wrapper">
+            <fieldset className="search-form__container">
+                <input type="text" className="search-form__input" placeholder="Фильм" />
+                <button className="search-form__submit">Найти</button>
+            </fieldset>
+            <FilterCheckbox checked={isChecked} caption="Короткометражки" onChange={handleChange} />
+        </div>
     </form>
 }
 
