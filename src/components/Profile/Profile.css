@@ -54,6 +54,10 @@
   width: 100%;
 }
 
+.profile__input:focus {
+  outline: 0;
+}
+
 .profile__button {
   background-color: white;
   border: 0;

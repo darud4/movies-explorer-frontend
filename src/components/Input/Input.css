@@ -19,3 +19,7 @@
   padding: 15px;
   max-width: 400px;
 }
+
+.input__input:focus {
+  outline: 0;
+}
