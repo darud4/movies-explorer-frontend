@@ -23,7 +23,7 @@ function App() {
       <div className="page">
         <Popup titleText="Какая-то ошибка" popupText="Текст какой-то ошбики" submitText="ОК" onClose={closeErrorPopup} isOpen={isErrorPopup} />
         <Routes>
-          <Route path='/' element={<><Header /><Main /><Footer /></>} />
+          <Route path='/' element={<><Header isLogged={false} /><Main /><Footer /></>} />
           <Route path='/signin' element={<Login />} />
           <Route path='/signup' element={<Register />} />
           <Route path='/movies' element={<><Header /><Movies /><Footer /></>} />
