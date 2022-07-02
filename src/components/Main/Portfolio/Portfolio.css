@@ -36,3 +36,21 @@
   line-height: 50px;
   background-color: rgba(0, 0, 0, 0);
 }
+
+@media screen and (max-width: 768px) {
+  .portfolio__item {
+    font-size: 28px;
+    line-height: 50px;
+  }
+}
+
+@media screen and (max-width: 580px) {
+  .portfolio {
+    padding-bottom: 70px;
+  }
+
+  .portfolio__item {
+    font-size: 18px;
+    line-height: 28px;
+  }
+}
