@@ -1,12 +1,13 @@
 import './Header.css';
 import Logo from '../Logo/Logo';
+import { Link } from 'react-router-dom';
 
-function Header() {
+function Header({ isLoggedIn }) {
     return <header className='header'>
         <Logo />
         <nav className='header__nav'>
-            <a className='header__action' href="/signup">Регистрация</a>
-            <a className='header__action header__action_green' href="/signin">Войти</a>
+            <Link className='header__action' to="/signup">Регистрация</Link>
+            <Link className='header__action header__action_green' to="/signin">Войти</Link>
         </nav>
     </header>
 }

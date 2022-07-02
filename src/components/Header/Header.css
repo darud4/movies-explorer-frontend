@@ -3,6 +3,12 @@
   justify-content: space-between;
   padding: 18px 70px;
   background-color: #5c5c5c;
+  color: white;
+}
+
+.header_logged {
+  background-color: white;
+  color: black;
 }
 
 .header__nav {
@@ -11,8 +17,8 @@
 }
 
 .header__action {
+  color: inherit;
   text-decoration: none;
-  color: white;
   font-size: 12px;
   font-weight: 500;
   line-height: 16px;
@@ -22,6 +28,7 @@
 }
 
 .header__action_green {
+  color: white;
   background-color: rgba(43, 224, 128, 1);
   border-radius: 3px;
 }
