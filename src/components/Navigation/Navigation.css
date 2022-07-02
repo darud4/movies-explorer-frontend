@@ -23,13 +23,18 @@
 }
 
 .navigation__link:hover {
-    text-decoration: underline;
+  text-decoration: underline;
 }
 
 .navigation__link_green {
   color: white;
   background-color: rgba(43, 224, 128, 1);
   border-radius: 3px;
+  padding: 8px 20px;
+}
+
+.navigation__link_green:hover {
+  background-color: rgba(43, 224, 128, .6);
 }
 
 .navigation__link_profile::after {
