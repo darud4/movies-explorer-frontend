@@ -31,13 +31,22 @@
   gap: 20px;
 }
 
-.footer__link {
+.footer__link-wrap {
   font-size: 13px;
   font-weight: 400;
   line-height: 16px;
   flex-grow: 0;
 }
 
-.footer__link:first-of-type {
+.footer__link-wrap:first-of-type {
   flex-grow: 1;
+}
+
+.footer__link {
+  text-decoration: none;
+  color: inherit;
+}
+
+.footer__link:hover {
+  text-decoration: underline;
 }
