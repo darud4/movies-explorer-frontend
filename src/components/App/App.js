@@ -9,11 +9,19 @@ import Login from '../Login/Login';
 import Register from '../Register/Register';
 import Page404 from '../Page404/Page404';
 import Profile from '../Profile/Profile';
+import Popup from '../Popup/Popup';
+import { useState } from 'react';
 
 function App() {
+
+  const [isErrorPopup, setErrorPopup] = useState(false);
+
+  const closeErrorPopup = () => setErrorPopup(false);
+
   return (
     <BrowserRouter>
       <div className="page">
+        <Popup titleText="Какая-то ошибка" popupText="Текст какой-то ошбики" submitText="ОК" onClose={closeErrorPopup} isOpen={isErrorPopup} />
         <Routes>
           <Route path='/' element={<><Header /><Main /><Footer /></>} />
           <Route path='/signin' element={<Login />} />
