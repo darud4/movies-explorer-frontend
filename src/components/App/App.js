@@ -4,6 +4,7 @@ import Main from '../Main/Main';
 import Footer from '../Footer/Footer';
 import Header from '../Header/Header';
 import Movies from '../Movies/Movies';
+import SavedMovies from '../SavedMovies/SavedMovies';
 import Login from '../Login/Login';
 import Register from '../Register/Register';
 import Page404 from '../Page404/Page404';
@@ -18,6 +19,7 @@ function App() {
           <Route path='/signin' element={<Login />} />
           <Route path='/signup' element={<Register />} />
           <Route path='/movies' element={<><Header /><Movies /><Footer /></>} />
+          <Route path='/saved-movies' element={<><Header /><SavedMovies /><Footer /></>} />
           <Route path='/profile' element={<><Header /><Profile /></>} />
 
           <Route path="*" element={<Page404 />} />
