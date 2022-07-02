@@ -6,8 +6,9 @@
   display: grid;
   margin-top: 66px;
   grid-template-areas: "name photo" "about photo" "bio photo" "contacts photo";
-  grid-template-columns: 600px auto;
+  grid-template-columns: auto auto;
   grid-template-rows: repeat(3, auto) 1fr;
+  column-gap: 50px;
 }
 
 .about-me__name {
@@ -34,6 +35,7 @@
   grid-area: bio;
   margin: 0;
   padding-top: 26px;
+  max-width: 600px;
 }
 
 .about-me__contacts {
@@ -55,6 +57,8 @@
 }
 
 .about-me__photo {
+  max-width: 292px;
+  max-height: 352px;
   width: 255px;
   height: 307px;
   grid-area: photo;
@@ -64,4 +68,55 @@
   border-radius: 10px;
   overflow: hidden;
   border: 1px solid white;
+}
+
+@media screen and (max-width: 768px) {
+  .about-me {
+    padding-bottom: 90px;
+  }
+
+  .about-me__name {
+    font-size: 40px;
+    line-height: 40px;
+  }
+
+  .about-me__about {
+    font-size: 12px;
+    line-height: 18px;
+  }
+  .about-me__bio {
+    font-size: 12px;
+    line-height: 18px;
+  }
+}
+
+@media screen and (max-width: 580px) {
+  .about-me {
+    padding-bottom: 70px;
+  }
+  .about-me__name {
+    margin-top: 20px;
+  }
+  .about-me__about {
+    padding: 0;
+  }
+  .about-me__photo {
+    width: 100%;
+    height: auto;
+    justify-self: center;
+  }
+
+  .about-me__bio {
+    padding: 0;
+  }
+  .about-me__person {
+    grid-template-columns: 1fr;
+    grid-template-areas: "photo" "name" "about" "bio" "contacts";
+    grid-template-rows: unset;
+    row-gap: 20px;
+  }
+  .about-me__contacts {
+    padding: 0;
+    margin-top: 20px;
+  }
 }

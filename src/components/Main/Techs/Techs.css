@@ -31,6 +31,7 @@
   display: flex;
   gap: 10px;
   flex-wrap: wrap;
+  justify-content: center;
 }
 
 .techs__tech {
@@ -44,4 +45,52 @@
   font-size: 14px;
   font-weight: 400;
   line-height: 17px;
+}
+
+@media screen and (max-width: 768px) {
+  .techs {
+    padding: 90px 50px;
+  }
+
+  .techs__title {
+    margin-top: 80px;
+  }
+
+  .techs__subtitle {
+    font-size: 12px;
+    line-height: 18px;
+    margin-top: 22px;
+  }
+
+  .techs__techs {
+    margin-top: 83px;
+  }
+
+  .techs__tech {
+    font-size: 12px;
+    line-height: 15px;
+    width: 84px;
+    height: 57px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .techs {
+    padding: 70px 18px;
+  }
+  .techs__title {
+    margin-top: 60px;
+    font-size: 30px;
+    line-height: 36px;
+  }
+
+  .techs__subtitle {
+    margin-top: 24px;
+    font-size: 11px;
+    line-height: 16px;
+  }
+
+  .techs__techs {
+    margin-top: 50px;
+  }
 }
