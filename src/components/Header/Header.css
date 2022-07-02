@@ -9,6 +9,7 @@
 .header_logged {
   background-color: white;
   color: black;
+  gap: 44px;
 }
 
 .header__nav {

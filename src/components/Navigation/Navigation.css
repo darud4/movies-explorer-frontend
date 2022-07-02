@@ -1,0 +1,45 @@
+.navigation {
+  display: flex;
+  gap: 30px;
+}
+
+.navigation_logged {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  width: 100%;
+  justify-content: start;
+  column-gap: 16px;
+}
+
+.navigation__link {
+  color: inherit;
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 16px;
+  padding: 8px 0;
+  display: flex;
+  align-items: center;
+}
+
+.navigation__link:hover {
+    text-decoration: underline;
+}
+
+.navigation__link_green {
+  color: white;
+  background-color: rgba(43, 224, 128, 1);
+  border-radius: 3px;
+}
+
+.navigation__link_profile::after {
+  content: "";
+  background-image: url(../../images/icon-account.svg);
+  margin-left: 10px;
+  display: block;
+  width: 14px;
+  height: 14px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+}
