@@ -60,7 +60,7 @@
   grid-area: photo;
   justify-self: end;
   object-fit: cover;
-  object-position: center;
+  object-position: top;
   border-radius: 10px;
   overflow: hidden;
   border: 1px solid white;
