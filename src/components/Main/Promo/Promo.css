@@ -46,7 +46,7 @@
 @media screen and (max-width: 480px) {
   .promo {
     gap: 60px;
-    padding: 183px 0 40px;
+    padding: 183px 10px 40px;
   }
   .promo__title {
     font-size: 31px;

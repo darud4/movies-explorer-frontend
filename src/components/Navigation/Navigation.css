@@ -1,6 +1,7 @@
 .navigation {
   display: flex;
   gap: 30px;
+  align-items: center;
 }
 
 .navigation_logged {
@@ -27,14 +28,14 @@
 }
 
 .navigation__link_green {
-  color: white;
+  color: black;
   background-color: rgba(43, 224, 128, 1);
   border-radius: 3px;
   padding: 8px 20px;
 }
 
 .navigation__link_green:hover {
-  background-color: rgba(43, 224, 128, .6);
+  background-color: rgba(43, 224, 128, 0.6);
 }
 
 .navigation__link_profile::after {
@@ -47,4 +48,18 @@
   background-repeat: no-repeat;
   background-position: center;
   background-size: contain;
+}
+
+@media screen and (max-width: 540px) {
+  .navigation {
+    gap: 14px;
+  }
+  .navigation__link {
+    font-size: 10px;
+    font-weight: 500;
+    line-height: 16px;
+  }
+  .navigation__link_green {
+    padding: 5px 12px;
+  }
 }
