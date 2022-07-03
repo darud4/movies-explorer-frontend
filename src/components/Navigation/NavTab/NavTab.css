@@ -25,6 +25,18 @@
   gap: 28px;
 }
 
+.navtab__link {
+  text-decoration: none;
+  color: black;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 22px;
+}
+
+.navtab__link_active {
+  text-decoration: underline;
+}
+
 .navtab__close {
   position: absolute;
   right: 22px;
@@ -44,9 +56,9 @@
 }
 
 .navtab__item_profile {
-    flex-grow: 1;
-    display: flex;
-    align-items: flex-end;
+  flex-grow: 1;
+  display: flex;
+  align-items: flex-end;
 }
 
 .navtab__item_profile::after {
