@@ -23,7 +23,7 @@
 .footer__links {
   list-style: none;
   width: 100%;
-  margin: 20xp 0 0;
+  margin: 20px 0 0;
   padding: 0;
   display: flex;
   grid-template-columns: 1fr auto;
@@ -35,10 +35,9 @@
   font-size: 13px;
   font-weight: 400;
   line-height: 16px;
-  flex-grow: 0;
 }
 
-.footer__link-wrap:first-of-type {
+.footer__link-wrap_copyright {
   flex-grow: 1;
 }
 
@@ -49,4 +48,29 @@
 
 .footer__link:hover {
   text-decoration: underline;
+}
+
+@media screen and (max-width: 480px) {
+  .footer {
+    padding: 80px 10px 10px;
+  }
+  .footer__title {
+    font-size: 12px;
+    line-height: 15px;
+  }
+  .footer__links {
+    flex-direction: column;
+    align-items: center;
+    margin-top: 30px;
+    gap: 12px;
+  }
+  .footer__link-wrap {
+    font-size: 12px;
+    line-height: 15px;
+  }
+  .footer__link-wrap_copyright {
+    margin-top: 30px;
+    color: rgba(160, 160, 160, 1);
+    order: 1;
+  }
 }
