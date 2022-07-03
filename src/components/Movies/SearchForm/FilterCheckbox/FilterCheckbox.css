@@ -17,6 +17,7 @@
   display: flex;
   padding: 2px;
   transition: all 0.3s;
+  cursor: pointer;
 }
 
 .filter-checkbox__span:hover {
@@ -41,4 +42,12 @@
 
 .filter-checkbox__checkbox {
   display: none;
+}
+
+@media screen and (max-width: 400px) {
+  .filter-checkbox__label {
+    font-size: 11px;
+    line-height: 18px;
+  }
+   
 }

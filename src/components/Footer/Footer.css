@@ -6,6 +6,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 100%;
 }
 
 .footer__title {
@@ -48,6 +49,12 @@
 
 .footer__link:hover {
   text-decoration: underline;
+}
+
+@media screen and (max-width: 768px) {
+  .footer {
+    background-color: white;
+  }
 }
 
 @media screen and (max-width: 480px) {

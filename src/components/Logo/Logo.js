@@ -1,9 +1,10 @@
 import './Logo.css';
-import logo from "../../images/logo.png";
+import { Link } from 'react-router-dom';
 
 
 function Logo() {
-    return <img alt="Логотип" src={logo} className="logo"/>
+
+    return <Link to="/" className="logo" />
 
 }
 

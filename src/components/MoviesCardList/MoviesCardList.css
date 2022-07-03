@@ -1,6 +1,21 @@
-.movie-card-list {
+.movies-card-list {
   padding: 70px 70px 10px;
   display: grid;
   gap: 10px 20px;
   grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+}
+
+@media screen and (max-width: 1024px) {
+  .movies-card-list {
+    padding-left: 30px;
+    padding-right: 30px;
+    gap: 30px;
+  }
+}
+
+@media screen and (max-width: 680px) {
+  .movies-card-list {
+    padding: 40px 10px;
+    row-gap: 34px;
+  }
 }

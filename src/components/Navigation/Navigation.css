@@ -49,6 +49,11 @@
   background-repeat: no-repeat;
   background-position: center;
   border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+.navigation__link_profile:hover::after {
+  background-color: rgb(190, 180, 180);
 }
 
 @media screen and (max-width: 540px) {
