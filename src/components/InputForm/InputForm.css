@@ -2,7 +2,6 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  max-width: 400px;
   margin: 0 auto;
   padding-top: 70px;
   padding-bottom: 70px;
@@ -30,7 +29,7 @@
 }
 
 .input-form__link:hover {
-    text-decoration: underline;
+  text-decoration: underline;
 }
 
 .input-form__inputs {
@@ -53,3 +52,20 @@
   align-items: center;
   border: 0;
 }
+
+@media screen and (max-width: 786px) {
+  .input-form {
+    max-height: 800px;
+    padding-top: 232px;
+  }
+  .input-form__buttons {
+    margin-top: 29px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+    .input-form {
+        align-items: center;
+        padding: 56px 30px 30px;
+      }
+    }

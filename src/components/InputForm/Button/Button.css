@@ -15,3 +15,10 @@
 .button:hover {
   opacity: 0.6;
 }
+
+@media screen and (max-width: 480px) {
+  .button {
+    min-width: unset;
+    width: 100%;
+  }
+}
