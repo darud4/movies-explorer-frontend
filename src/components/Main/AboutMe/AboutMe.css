@@ -67,7 +67,6 @@
   object-position: top;
   border-radius: 10px;
   overflow: hidden;
-  border: 1px solid white;
 }
 
 @media screen and (max-width: 800px) {

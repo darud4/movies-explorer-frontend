@@ -16,7 +16,7 @@ function AboutMe() {
             <ul className="about-me__contacts">
                 <li>
                     <a href="http://facebook.com" className="about-me__contact">Facebook</a></li>
-                <li><a href="http://github.com" className="about-me__contact">Github</a></li>
+                <li><a href="https://github.com/darud4" className="about-me__contact">Github</a></li>
             </ul>
             <img src={photo} alt="Фото студента" className="about-me__photo" />
         </div>
