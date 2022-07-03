@@ -10,8 +10,9 @@
 
 .profile__inputs {
   padding: 0;
+  margin: 0;
   max-width: 430px;
-  margin-top: 107px;
+  margin-top: 123px;
   border: 0;
   display: flex;
   flex-direction: column;
@@ -22,6 +23,7 @@
 
 .profile__buttons {
   padding: 0;
+  margin: 0;
   max-width: 410px;
   gap: 16px;
   border: 0;
@@ -30,7 +32,6 @@
   align-items: center;
   width: 100%;
 }
-
 
 .profile__button {
   background-color: white;
@@ -48,4 +49,33 @@
 
 .profile__button_attention {
   color: rgba(238, 52, 101, 1);
+  font-weight: 500;
+}
+
+@media screen and (max-width: 768px) {
+  .profile {
+    padding-top: 236px;
+    max-height: 680px;
+  }
+
+  .profile__inputs {
+    margin-top: 96px;
+  }
+}
+
+@media screen and (max-width: 490px) {
+  .profile {
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-top: 70px;
+  }
+
+  .profile__inputs {
+    margin-top: 80px;
+  }
+
+  .profile__button {
+    font-size: 12px;
+    line-height: 14.5px;
+  }
 }
