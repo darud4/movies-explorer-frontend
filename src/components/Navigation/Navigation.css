@@ -96,4 +96,9 @@
   .navigation__link_green {
     padding: 5px 12px;
   }
+
+  .navigation__menu {
+    width: 40px;
+    height: 43px;
+  }
 }
