@@ -43,11 +43,12 @@
   background-image: url(../../images/icon-account.svg);
   margin-left: 10px;
   display: block;
-  width: 14px;
-  height: 14px;
+  width: 26px;
+  height: 30px;
+  background-color: rgba(249, 249, 249, 1);
   background-repeat: no-repeat;
   background-position: center;
-  background-size: contain;
+  border-radius: 4px;
 }
 
 @media screen and (max-width: 540px) {
