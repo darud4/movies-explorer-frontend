@@ -70,7 +70,8 @@
   height: 30px;
   background-color: rgba(249, 249, 249, 1);
   background-repeat: no-repeat;
-  background-position: bottom;
+  background-position: center;
   border-radius: 4px;
   transition: background-color 0.3s ease;
+  margin-bottom: -4px;
 }
