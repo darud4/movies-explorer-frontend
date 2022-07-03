@@ -56,6 +56,33 @@
   background-color: rgb(190, 180, 180);
 }
 
+.navigation__menu {
+  border: 0;
+  background-image: url(../../images/icon-menu.svg);
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-color: transparent;
+  height: 44px;
+  width: 44px;
+  display: none;
+}
+
+@media screen and (max-width: 768px) {
+  .navigation_logged {
+    display: flex;
+    justify-content: flex-end;
+  }
+  
+  .navigation__menu {
+    display: inline-block;
+  }
+
+  .navigation__link_logged {
+    display: none;
+  }
+}
+
 @media screen and (max-width: 540px) {
   .navigation {
     gap: 14px;
