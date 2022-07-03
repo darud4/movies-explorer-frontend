@@ -1,0 +1,20 @@
+.more {
+  padding: 50px 70px 80px;
+}
+
+.more__button {
+  border: 0;
+  border-radius: 6px;
+  padding: 11px 0 9px;
+  text-align: center;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 15px;
+  background-color: rgba(249, 249, 249, 1);
+  width: 100%;
+  transition: background-color 0.3s ease;
+}
+
+.more__button:hover {
+  background-color: rgb(190, 180, 180);
+}
