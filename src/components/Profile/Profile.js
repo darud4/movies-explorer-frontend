@@ -12,7 +12,7 @@ function Profile() {
     const handleEmailChange = (newVal) => setEmail(newVal);
 
     return (<form className="profile" name='profile'>
-        <h2 className="title">Привет, Виталий!</h2>
+        <h2 className="title">Привет, {name}</h2>
         <fieldset className="profile__inputs">
             <ProfileInput caption="Имя" name='name' placeholder='Введите имя' value={name} onChange={handleNameChange} />
             <ProfileInput caption="E-mail" name='email' placeholder='Введите адрес электронной почты' value={email} onChange={handleEmailChange} />

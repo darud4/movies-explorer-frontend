@@ -50,7 +50,7 @@
   height: 25px;
   border-radius: 50%;
   background-color: rgba(249, 249, 249, 1);
-  background-image: url(../../images/icon-like.png);
+  background-image: url(../../images/icon-like.svg);
   background-repeat: no-repeat;
   background-position: center;
   transition: background-color 0.3s ease;
@@ -61,7 +61,7 @@
 }
 
 .movies-card__like_active {
-  background-image: url(../../images/icon-like-active.png);
+  background-image: url(../../images/icon-like-active.svg);
 }
 
 @media screen and (max-width: 400px) {
