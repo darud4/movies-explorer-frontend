@@ -10,12 +10,12 @@ function MoviesCard({ image = picExample, name = 'инадцаfsfsfsdfsfdfsfsdт
         setLike(!isLiked);
     }
 
-    return <div className="movies-card">
+    return (<li className="movies-card">
         <img className="movies-card__image" alt={name} src={image}></img>
         <span className="movies-card__name">{name}</span>
         <div className={`movies-card__like ${isLiked ? 'movies-card__like_active' : ''}`} onClick={handleLikeClick}></div>
         <p className="movies-card__duration">{duration}</p>
-    </div>
+    </li>);
 }
 
 export default MoviesCard;

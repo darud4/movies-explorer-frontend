@@ -16,10 +16,10 @@ function SearchForm() {
 
     return <form className="search-form">
         <div className="search-form__container">
-            <fieldset className={`search-form__search-string ${isFocused ? 'search-form__search-string_active' : ''}`}>
+            <label className={`search-form__search-string ${isFocused ? 'search-form__search-string_active' : ''}`}>
                 <input type="text" onFocus={handleFocus} onBlur={handleBlur} className="search-form__input" placeholder="Фильм" />
                 <button className="search-form__submit">Найти</button>
-            </fieldset>
+            </label>
             <FilterCheckbox checked={isChecked} caption="Короткометражки" onChange={handleChange} />
         </div>
     </form>
