@@ -2,10 +2,10 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
   padding-top: 74px;
   max-height: 626px;
   height: 100vh;
+  box-sizing: border-box;
 }
 
 .profile__inputs {
@@ -17,6 +17,7 @@
   flex-direction: column;
   align-items: center;
   width: 100%;
+  flex-grow: 1;
 }
 
 .profile__buttons {
