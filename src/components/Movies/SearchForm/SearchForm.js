@@ -4,16 +4,20 @@ import FilterCheckbox from './FilterCheckbox/FilterCheckbox';
 
 function SearchForm() {
     const [isChecked, setChecked] = useState(false);
+    const [isFocused, setFocused] = useState(false);
 
     function handleChange({ target: { checked: newState } }) {
         console.log(newState);
         setChecked(newState);
     }
 
+    const handleFocus = () => setFocused(true);
+    const handleBlur = () => setFocused(false);
+
     return <form className="search-form">
-        <div className="search-form__outer-wrapper">
-            <fieldset className="search-form__container">
-                <input type="text" className="search-form__input" placeholder="Фильм" />
+        <div className="search-form__container">
+            <fieldset className={`search-form__search-string ${isFocused ? 'search-form__search-string_active' : ''}`}>
+                <input type="text" onFocus={handleFocus} onBlur={handleBlur} className="search-form__input" placeholder="Фильм" />
                 <button className="search-form__submit">Найти</button>
             </fieldset>
             <FilterCheckbox checked={isChecked} caption="Короткометражки" onChange={handleChange} />
