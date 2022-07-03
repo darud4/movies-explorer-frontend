@@ -1,25 +1,16 @@
-import './Register.css';
-import Logo from '../Logo/Logo';
-import '../Title/Title.css';
-import Input from '../Input/Input';
-import Button from '../Button/Button';
-import { Link } from 'react-router-dom';
+import InputForm from '../InputForm/InputForm';
 
+const inputs = [{ caption: "Имя", name: "name" }, { caption: 'E-mail', name: 'email' }, { caption: "Пароль", name: 'password' }];
 
 function Register() {
-    return <form className="login" name="login">
-        <Logo />
-        <h1 className="title">Добро пожаловать!</h1>
-        <fieldset className="login__inputs">
-            <Input label="Имя" />
-            <Input label="E-mail" />
-            <Input label="Пароль" />
-        </fieldset>
-        <fieldset className="login__buttons">
-            <Button caption="Зарегистрироваться" />
-            <span className="login__text">Уже зарегистрированы?<Link to="/signin" className="login__link">Войти</Link></span>
-        </fieldset>
-    </form>
+    return (<InputForm
+        inputs={inputs}
+        title="Добро пожаловать!"
+        formName='register'
+        buttonName="Зарегистрироваться"
+        bottomText="Уже зарегистрированы?"
+        bottomLink="Войти"
+        linkTarget="/signin" />);
 }
 
 export default Register;

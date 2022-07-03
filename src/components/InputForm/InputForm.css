@@ -1,14 +1,18 @@
-.login {
+.input-form {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   max-width: 400px;
   margin: 0 auto;
   padding-top: 70px;
+  padding-bottom: 70px;
   gap: 40px;
+  max-height: 700px;
+  height: 100vh;
+  box-sizing: border-box;
 }
 
-.login__text {
+.input-form__text {
   margin: 6px 0 0;
   font-size: 14px;
   font-weight: 400;
@@ -16,7 +20,7 @@
   color: rgba(160, 160, 160, 1);
 }
 
-.login__link {
+.input-form__link {
   font-size: 14px;
   font-weight: 400;
   line-height: 17px;
@@ -25,21 +29,22 @@
   padding-left: 6px;
 }
 
-.login__link:hover {
-  text-decoration: underline;
+.input-form__link:hover {
+    text-decoration: underline;
 }
 
-.login__inputs {
+.input-form__inputs {
   border: 0;
   width: 100%;
   display: flex;
   flex-direction: column;
   gap: 20px;
-  padding: 0 0 70px;
+  padding: 0;
   margin: 0;
+  flex-grow: 1;
 }
 
-.login__buttons {
+.input-form__buttons {
   display: flex;
   gap: 16px;
   flex-direction: column;
