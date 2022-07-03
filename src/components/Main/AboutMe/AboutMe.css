@@ -56,6 +56,10 @@
   color: black;
 }
 
+.about-me__contact:hover {
+  text-decoration: underline;
+}
+
 .about-me__photo {
   max-width: 292px;
   max-height: 352px;
