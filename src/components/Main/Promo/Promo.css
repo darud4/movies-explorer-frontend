@@ -25,6 +25,10 @@
   width: 722px;
   height: 244px;
   align-self: flex-end;
+  background-image: url(../../../images/promo.svg);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 @media screen and (max-width: 850px) {

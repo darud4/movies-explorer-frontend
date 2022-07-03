@@ -18,7 +18,7 @@ function AboutMe() {
                     <a href="http://facebook.com" className="about-me__contact">Facebook</a></li>
                 <li><a href="https://github.com/darud4" className="about-me__contact">Github</a></li>
             </ul>
-            <img src={photo} alt="Фото студента" className="about-me__photo" />
+            <img src={photo} alt="Моё фото" className="about-me__photo" />
         </div>
     </section>
 
