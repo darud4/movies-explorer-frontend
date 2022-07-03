@@ -70,7 +70,7 @@
   border: 1px solid white;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 800px) {
   .about-me {
     padding-bottom: 90px;
   }
@@ -90,9 +90,9 @@
   }
 }
 
-@media screen and (max-width: 580px) {
+@media screen and (max-width: 650px) {
   .about-me {
-    padding-bottom: 70px;
+    padding: 70px 14px;
   }
   .about-me__name {
     margin-top: 20px;
