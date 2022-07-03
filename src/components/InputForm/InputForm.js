@@ -11,6 +11,7 @@ function InputForm({ inputs, title, formName, buttonName, bottomText, bottomLink
         <h1 className="title">{title}</h1>
         <fieldset className="input-form__inputs">
             {inputs.map(({ caption, name }, i) => <Input key={i} label={caption} name={name} />)}
+            <span className="input-form__error">Что-то пошло не так...</span>
         </fieldset>
         <fieldset className="input-form__buttons">
             <Button caption={buttonName} />
