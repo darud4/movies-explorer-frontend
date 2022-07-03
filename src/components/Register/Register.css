@@ -25,6 +25,10 @@
   padding-left: 6px;
 }
 
+.login__link:hover {
+  text-decoration: underline;
+}
+
 .login__inputs {
   border: 0;
   width: 100%;

@@ -7,5 +7,11 @@
   border: 0;
   min-width: 400px;
   min-height: 45px;
-  border-radius: 3px;  
+  border-radius: 3px;
+  transition: opacity 0.3s ease;
+  cursor: pointer;
+}
+
+.button:hover {
+  opacity: 0.6;
 }
