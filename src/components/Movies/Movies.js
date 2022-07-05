@@ -9,7 +9,7 @@ function Movies() {
 
     const [movies] = useState([...defaultCards]);
 
-    return <section className="movies"><SearchForm /><MoviesCardList movies={movies} /><More isVisible={movies.length > 0} /></section>
+    return <section className="movies"><SearchForm /><MoviesCardList movies={movies} buttonClassName='' /><More isVisible={movies.length > 0} /></section>
 
 }
 
