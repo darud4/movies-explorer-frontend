@@ -17,7 +17,7 @@ function SearchForm() {
     return <form className="search-form">
         <div className="search-form__container">
             <label className={`search-form__search-string ${isFocused ? 'search-form__search-string_active' : ''}`}>
-                <input type="text" onFocus={handleFocus} onBlur={handleBlur} className="search-form__input" placeholder="Фильм" />
+                <input type="text" onFocus={handleFocus} onBlur={handleBlur} className="search-form__input" placeholder="Фильм" required/>
                 <button className="search-form__submit">Найти</button>
             </label>
             <FilterCheckbox checked={isChecked} caption="Короткометражки" onChange={handleChange} />
