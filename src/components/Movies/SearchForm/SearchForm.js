@@ -7,7 +7,6 @@ function SearchForm() {
     const [isFocused, setFocused] = useState(false);
 
     function handleChange({ target: { checked: newState } }) {
-        console.log(newState);
         setChecked(newState);
     }
 
