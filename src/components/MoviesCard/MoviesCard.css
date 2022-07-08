@@ -65,6 +65,10 @@
   background-image: url(../../images/icon-like-active.svg);
 }
 
+.movies-card__like_remove {
+  background-image: url(../../images/icon-cross.svg);
+}
+
 @media screen and (max-width: 400px) {
   .movies-card__name {
     font-size: 12px;
