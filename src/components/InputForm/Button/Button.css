@@ -16,6 +16,11 @@
   opacity: 0.6;
 }
 
+.button_disabled {
+  background-color: rgb(184, 201, 192);
+  pointer-events: none;
+}
+
 @media screen and (max-width: 480px) {
   .button {
     min-width: unset;

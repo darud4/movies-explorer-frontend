@@ -1,7 +1,10 @@
 import './Button.css';
 
-function Button({ caption }) {
-    return <button className="button" type="submit">{caption}</button>
+function Button({ caption, isValid }) {
+
+    const cl = isValid ? '' : 'button_disabled';
+
+    return <button className={`button ${cl}`} type="submit" disabled={!isValid}>{caption}</button>
 
 }
 
