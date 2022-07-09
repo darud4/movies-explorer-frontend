@@ -5,7 +5,7 @@ import React from 'react';
 
 const inputs = [{ caption: 'E-mail', name: 'email', type: 'email', id: 1 }, { caption: "Пароль", name: 'password', type: 'password', id: 2 }];
 
-function Login() {
+function Login({ onSubmit }) {
 
     const { values, errors, isValid, handleChange, resetForm } = useFormWithValidation();
 
@@ -23,6 +23,7 @@ function Login() {
         errors={errors}
         isValid={isValid}
         onChange={handleChange}
+        onSubmit={onSubmit}
     />);
 }
 

@@ -12,6 +12,9 @@ import Page404 from '../Page404/Page404';
 import Profile from '../Profile/Profile';
 import Popup from '../Popup/Popup';
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
+import { mainApi } from '../../utils/MainApi';
+import { moviesApi } from '../../utils/MoviesApi';
+import { doLogin } from '../../utils/auth';
 
 function App() {
 
@@ -20,6 +23,20 @@ function App() {
 
   const closeErrorPopup = () => setErrorPopup(false);
 
+  async function handleLogin({ email, password }) {
+    try {
+      const response = await doLogin(email, password)
+      console.log(response);
+    }
+    catch (err) {
+      console.log(err);
+    }
+  }
+
+  function handleRegister({ name, email, password }) {
+
+  }
+
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <BrowserRouter>
@@ -27,8 +44,8 @@ function App() {
           <Popup titleText="Какая-то ошибка" popupText="Текст какой-то ошбики" submitText="ОК" onClose={closeErrorPopup} isOpen={isErrorPopup} />
           <Routes>
             <Route path='/' element={<><Header isLogged={false} /><Main /><Footer /></>} />
-            <Route path='/signin' element={<Login />} />
-            <Route path='/signup' element={<Register />} />
+            <Route path='/signin' element={<Login onSubmit={handleLogin} />} />
+            <Route path='/signup' element={<Register onSubmit={handleRegister} />} />
             <Route path='/movies' element={<><Header /><Movies /><Footer /></>} />
             <Route path='/saved-movies' element={<><Header /><SavedMovies /><Footer /></>} />
             <Route path='/profile' element={<><Header /><Profile /></>} />

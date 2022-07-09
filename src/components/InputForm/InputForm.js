@@ -6,10 +6,10 @@ import Input from './Input/Input';
 import Button from './Button/Button';
 
 function InputForm({ inputs, values = {}, errors = {}, isValid, onChange, onSubmit, title, formName, buttonName, bottomText, bottomLink, linkTarget }) {
-    
+
     function handleSubmit(evt) {
         evt.preventDefault();
-        onSubmit();
+        onSubmit && onSubmit(values);
     }
 
     return (<form noValidate className="input-form" name={formName} onSubmit={handleSubmit}>
