@@ -1,3 +1,3 @@
 export const CONFIG = {
-    baseUrl: '',
+    baseUrl: 'https://api.darud-diploma.nomoreparties.sbs',
 }
