@@ -5,8 +5,14 @@ import Logo from '../Logo/Logo';
 import Input from './Input/Input';
 import Button from './Button/Button';
 
-function InputForm({ inputs, values = {}, errors = {}, isValid, onChange, title, formName, buttonName, bottomText, bottomLink, linkTarget }) {
-    return (<form noValidate className="input-form" name={formName}>
+function InputForm({ inputs, values = {}, errors = {}, isValid, onChange, onSubmit, title, formName, buttonName, bottomText, bottomLink, linkTarget }) {
+    
+    function handleSubmit(evt) {
+        evt.preventDefault();
+        onSubmit();
+    }
+
+    return (<form noValidate className="input-form" name={formName} onSubmit={handleSubmit}>
         <Logo />
         <h1 className="title">{title}</h1>
         <fieldset className="input-form__inputs">
