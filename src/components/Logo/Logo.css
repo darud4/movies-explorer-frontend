@@ -1,0 +1,15 @@
+.logo {
+  transition: opacity 0.3s ease;
+  width: 38px;
+  height: 38px;
+  cursor: pointer;
+  background-image: url(../../images/logo.svg);
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  flex-shrink: 0;
+}
+
+.logo:hover {
+  opacity: 0.6;
+}

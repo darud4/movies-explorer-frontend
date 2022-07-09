@@ -1,0 +1,78 @@
+.input-form {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin: 0 auto;
+  padding-top: 70px;
+  padding-bottom: 70px;
+  gap: 40px;
+  max-height: 700px;
+  height: 100vh;
+  box-sizing: border-box;
+}
+
+.input-form__text {
+  margin: 6px 0 0;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 17px;
+  color: rgba(160, 160, 160, 1);
+}
+
+.input-form__link {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 17px;
+  color: rgba(43, 224, 128, 1);
+  text-decoration: none;
+  padding-left: 6px;
+}
+
+.input-form__link:hover {
+  text-decoration: underline;
+}
+
+.input-form__inputs {
+  border: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 0;
+  margin: 0;
+  flex-grow: 1;
+}
+
+.input-form__buttons {
+  display: flex;
+  gap: 16px;
+  flex-direction: column;
+  padding: 0;
+  margin: 0;
+  align-items: center;
+  border: 0;
+}
+
+.input-form__error {
+  font-size: 10px;
+  font-weight: 400;
+  line-height: 12px;
+  color: rgba(238, 52, 101, 1);
+}
+
+@media screen and (max-width: 786px) {
+  .input-form {
+    max-height: 800px;
+    padding-top: 232px;
+  }
+  .input-form__buttons {
+    margin-top: 29px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .input-form {
+    align-items: center;
+    padding: 56px 30px 30px;
+  }
+}

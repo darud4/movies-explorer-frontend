@@ -1,0 +1,77 @@
+.navtab {
+  background-color: rgba(0, 0, 0, 0.3);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 20;
+}
+
+.navtab__container {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  max-width: 520px;
+  width: 100%;
+  background-color: white;
+  list-style: none;
+  margin: 0;
+  padding: 150px 0 92px;
+  gap: 28px;
+}
+
+.navtab__link {
+  text-decoration: none;
+  color: black;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 22px;
+}
+
+.navtab__link_active {
+  text-decoration: underline;
+}
+
+.navtab__close {
+  position: absolute;
+  right: 22px;
+  top: 22px;
+  border: 0;
+  width: 22px;
+  height: 22px;
+  background-image: url(../../../images/navtab-close.svg);
+  background-color: transparent;
+  background-size: cover;
+  background-position: center;
+  transition: opacity 0.3s ease;
+}
+
+.navtab__close:hover {
+  opacity: 0.6;
+}
+
+.navtab__item_profile {
+  flex-grow: 1;
+  display: flex;
+  align-items: flex-end;
+}
+
+.navtab__item_profile::after {
+  content: "";
+  background-image: url(../../../images/icon-account.svg);
+  margin-left: 10px;
+  display: inline-block;
+  width: 26px;
+  height: 30px;
+  background-color: rgba(249, 249, 249, 1);
+  background-repeat: no-repeat;
+  background-position: center;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+  margin-bottom: -4px;
+}

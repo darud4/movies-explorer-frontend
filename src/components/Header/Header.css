@@ -1,0 +1,26 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 70px;
+  background-color: #5c5c5c;
+  color: white;
+}
+
+.header_logged {
+  background-color: white;
+  color: black;
+  gap: 44px;
+}
+
+@media screen and (max-width: 768px) {
+  .header {
+    padding: 18px 30px;
+  }
+}
+
+@media screen and (max-width: 540px) {
+  .header {
+    padding: 18px 14px;
+  }
+}

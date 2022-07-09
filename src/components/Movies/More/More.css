@@ -1,0 +1,35 @@
+.more {
+  padding: 50px 70px 80px;
+}
+
+.more__button {
+  border: 0;
+  border-radius: 6px;
+  padding: 11px 0 9px;
+  text-align: center;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 14.5px;
+  background-color: rgba(249, 249, 249, 1);
+  width: 100%;
+  transition: background-color 0.3s ease;
+  cursor: pointer;
+}
+
+.more__button:hover {
+  background-color: rgb(190, 180, 180);
+}
+
+@media screen and (max-width: 768px) {
+  .more {
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .more {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+}

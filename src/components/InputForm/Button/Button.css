@@ -1,0 +1,24 @@
+.button {
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(43, 224, 128, 1);
+  border: 0;
+  min-width: 400px;
+  min-height: 45px;
+  border-radius: 3px;
+  transition: opacity 0.3s ease;
+  cursor: pointer;
+}
+
+.button:hover {
+  opacity: 0.6;
+}
+
+@media screen and (max-width: 480px) {
+  .button {
+    min-width: unset;
+    width: 100%;
+  }
+}
