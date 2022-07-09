@@ -10,7 +10,7 @@ function InputForm({ inputs, values = {}, errors = {}, isValid, onChange, title,
         <Logo />
         <h1 className="title">{title}</h1>
         <fieldset className="input-form__inputs">
-            {inputs.map(({ caption, name, type = 'text' }, i) => <Input key={i} type={type} label={caption} name={name} onChange={onChange} value={values[name]} error={errors[name]} />)}
+            {inputs.map(({ caption, name, type = 'text', id }) => <Input key={id} type={type} label={caption} name={name} onChange={onChange} value={values[name]} error={errors[name]} />)}
             <span className="input-form__error"></span>
         </fieldset>
         <fieldset className="input-form__buttons">
