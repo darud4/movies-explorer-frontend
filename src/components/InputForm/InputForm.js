@@ -6,11 +6,11 @@ import Input from './Input/Input';
 import Button from './Button/Button';
 
 function InputForm({ inputs, values = {}, errors = {}, isValid, onChange, title, formName, buttonName, bottomText, bottomLink, linkTarget }) {
-    return (<form className="input-form" name={formName}>
+    return (<form noValidate className="input-form" name={formName}>
         <Logo />
         <h1 className="title">{title}</h1>
         <fieldset className="input-form__inputs">
-            {inputs.map(({ caption, name }, i) => <Input key={i} label={caption} name={name} onChange={onChange} value={values[name]} error={errors[name]} />)}
+            {inputs.map(({ caption, name, type = 'text' }, i) => <Input key={i} type={type} label={caption} name={name} onChange={onChange} value={values[name]} error={errors[name]} />)}
             <span className="input-form__error"></span>
         </fieldset>
         <fieldset className="input-form__buttons">

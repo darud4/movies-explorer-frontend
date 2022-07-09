@@ -3,7 +3,7 @@ import InputForm from '../InputForm/InputForm';
 import useFormWithValidation from '../useFormWithValidation/useFormWithValidation';
 import React from 'react';
 
-const inputs = [{ caption: 'E-mail', name: 'email' }, { caption: "Пароль", name: 'password' }];
+const inputs = [{ caption: 'E-mail', name: 'email', type: 'email' }, { caption: "Пароль", name: 'password', type: 'password' }];
 
 function Login() {
 
