@@ -4,10 +4,9 @@ import SearchForm from './SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import More from './More/More';
 import Preloader from './Preloader/Preloader';
-import { getResults, saveCheckbox, saveResults, saveSearchString } from '../../utils/storage';
-import { searchMovies } from '../../utils/search';
+import { getResults } from '../../utils/storage';
 
-function Movies({ buttonModifier = 'movies-card__like' }) {
+function Movies({ buttonModifier = 'movies-card__like', onSearch }) {
 
     const [moviesToShow, setMoviesToShow] = useState(0);
     const [movies, setMovies] = useState([]);
@@ -30,20 +29,15 @@ function Movies({ buttonModifier = 'movies-card__like' }) {
         setMoviesToShow(Math.min(getInitialNumber(), movies.length));
     }, [movies]);
 
-    async function doSearch(searchText, isShortMeter) {
-        //    console.log(searchText, isShortMeter);
-        if (!searchText) return;
+    async function handleSubmit(searchText, isShortMeter) {
         setPreloader(true);
-        const filteredMovies = await searchMovies(searchText, isShortMeter);
-
-        setMoviesMessage(filteredMovies.message)
-
-        setMovies(filteredMovies.data);
-
-        saveResults(filteredMovies.data);
-        saveSearchString(searchText);
-        saveCheckbox(isShortMeter);
-
+        try {
+            const filteredMovies = await onSearch(searchText, isShortMeter);
+            setMoviesMessage(filteredMovies.message)
+            setMovies(filteredMovies.data);
+        } catch (error) {
+            setMoviesMessage('Что-то пошло не так');
+        }
         setPreloader(false);
     }
 
@@ -60,7 +54,7 @@ function Movies({ buttonModifier = 'movies-card__like' }) {
     }
 
     return (<main className="movies">
-        <SearchForm onSubmit={doSearch} />
+        <SearchForm onSubmit={handleSubmit} />
         {isPreloader
             ? <Preloader />
             : moviesMessage

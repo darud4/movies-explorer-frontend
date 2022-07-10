@@ -14,6 +14,9 @@ import Popup from '../Popup/Popup';
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import { mainApi } from '../../utils/MainApi';
 import { doLogin } from '../../utils/auth';
+import { searchMovies } from '../../utils/search';
+import { saveSearchString, saveResults, saveCheckbox } from '../../utils/storage';
+
 
 function App() {
 
@@ -36,6 +39,17 @@ function App() {
 
   }
 
+  async function doSearch(searchText, isShortMeter) {
+    try {
+      const filteredMovies = await searchMovies(searchText, isShortMeter);
+      saveResults(filteredMovies.data);
+      saveSearchString(searchText);
+      saveCheckbox(isShortMeter);
+      return filteredMovies;
+    } catch (error) {
+      return { message: 'Что-то пошло не так', data: [] };
+    }
+  }
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
@@ -46,7 +60,7 @@ function App() {
             <Route path='/' element={<><Header isLogged={false} /><Main /><Footer /></>} />
             <Route path='/signin' element={<Login onSubmit={handleLogin} />} />
             <Route path='/signup' element={<Register onSubmit={handleRegister} />} />
-            <Route path='/movies' element={<><Header /><Movies /><Footer /></>} />
+            <Route path='/movies' element={<><Header /><Movies onSearch={doSearch} /><Footer /></>} />
             <Route path='/saved-movies' element={<><Header /><SavedMovies /><Footer /></>} />
             <Route path='/profile' element={<><Header /><Profile /></>} />
 
