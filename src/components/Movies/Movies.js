@@ -5,7 +5,7 @@ import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import More from './More/More';
 import Preloader from './Preloader/Preloader';
 
-function Movies({ movies = [], buttonModifier = 'movies-card__like', onSearch, isPreloader }) {
+function Movies({ movies, buttonModifier = 'movies-card__like', onSearch, isPreloader, message }) {
 
     const [moviesToShow, setMoviesToShow] = useState(0);
 
@@ -42,18 +42,21 @@ function Movies({ movies = [], buttonModifier = 'movies-card__like', onSearch, i
 
     return (<main className="movies">
         <SearchForm onSubmit={handleSubmit} />
-        {isPreloader ? <Preloader /> :
-            <>
-                <MoviesCardList
-                    ref={moviesRef}
-                    movies={movies}
-                    buttonClassName={buttonModifier}
-                    moviesToShow={moviesToShow}
-                />
-                <More isVisible={movies.length > 0 && moviesToShow < movies.length} onClick={handleMore} />
-            </>
+        {isPreloader
+            ? <Preloader />
+            : message
+                ? <span className="movies__message">{message}</span>
+                : <>
+                    <MoviesCardList
+                        ref={moviesRef}
+                        movies={movies}
+                        buttonClassName={buttonModifier}
+                        moviesToShow={moviesToShow}
+                    />
+                    <More isVisible={movies.length > 0 && moviesToShow < movies.length} onClick={handleMore} />
+                </>
         }
-    </main>);
+    </main >);
 
 }
 
