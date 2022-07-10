@@ -13,16 +13,12 @@ import Profile from '../Profile/Profile';
 import Popup from '../Popup/Popup';
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import { mainApi } from '../../utils/MainApi';
-import { moviesApi } from '../../utils/MoviesApi';
 import { doLogin } from '../../utils/auth';
 
 function App() {
 
   const [isErrorPopup, setErrorPopup] = useState(false);
   const [currentUser, setCurrentUser] = useState({});
-  const [movies, setMovies] = useState([]);
-  const [isPreloader, setPreloader] = useState(false);
-  const [moviesMessage, setMoviesMessage] = useState('');
 
   const closeErrorPopup = () => setErrorPopup(false);
 
@@ -40,24 +36,7 @@ function App() {
 
   }
 
-  async function doSearch(searchText, isShortMeter) {
-    //    console.log(searchText, isShortMeter);
-    if (!searchText) return;
-    setMoviesMessage('');
-    setPreloader(true);
-    try {
-      const results = await moviesApi.search(searchText);
-      const filteredMovies = results.filter(movie =>
-        ((isShortMeter && movie.duration < 41) || !isShortMeter)
-        && movie.nameRU.toLowerCase().includes(searchText.toLowerCase()));
-      setMovies(filteredMovies);
-      if (filteredMovies.length === 0) setMoviesMessage('Ничего не найдено');
-    } catch (error) {
-      setMoviesMessage('Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз');
-    }
-    setPreloader(false);
-  }
-
+  
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <BrowserRouter>
@@ -67,7 +46,7 @@ function App() {
             <Route path='/' element={<><Header isLogged={false} /><Main /><Footer /></>} />
             <Route path='/signin' element={<Login onSubmit={handleLogin} />} />
             <Route path='/signup' element={<Register onSubmit={handleRegister} />} />
-            <Route path='/movies' element={<><Header /><Movies onSearch={doSearch} movies={movies} isPreloader={isPreloader} message={moviesMessage} /><Footer /></>} />
+            <Route path='/movies' element={<><Header /><Movies  /><Footer /></>} />
             <Route path='/saved-movies' element={<><Header /><SavedMovies /><Footer /></>} />
             <Route path='/profile' element={<><Header /><Profile /></>} />
 

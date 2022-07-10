@@ -1,6 +1,7 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import './SearchForm.css';
 import FilterCheckbox from './FilterCheckbox/FilterCheckbox';
+import { getCheckbox, getSearchString } from '../../../utils/storage';
 
 function SearchForm({ onSubmit }) {
     const [isChecked, setChecked] = useState(false);
@@ -8,6 +9,11 @@ function SearchForm({ onSubmit }) {
     const [error, setError] = useState('');
 
     const inputRef = useRef();
+
+    useEffect(() => {
+        setChecked(getCheckbox());
+        inputRef.current.value = getSearchString();
+    }, [])
 
     function handleChange({ target: { checked: newState } }) {
         setChecked(newState);
@@ -20,7 +26,7 @@ function SearchForm({ onSubmit }) {
         evt.preventDefault();
         if (!evt.target.checkValidity()) { setError('Нужно ввести ключевое слово'); return; }
         setError('');
-//        console.log(inputRef.current.value, isChecked);
+        //        console.log(inputRef.current.value, isChecked);
         onSubmit && onSubmit(inputRef.current.value, isChecked);
     }
 
