@@ -36,7 +36,7 @@ function App() {
 
   }
 
-  
+
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <BrowserRouter>
@@ -46,7 +46,7 @@ function App() {
             <Route path='/' element={<><Header isLogged={false} /><Main /><Footer /></>} />
             <Route path='/signin' element={<Login onSubmit={handleLogin} />} />
             <Route path='/signup' element={<Register onSubmit={handleRegister} />} />
-            <Route path='/movies' element={<><Header /><Movies  /><Footer /></>} />
+            <Route path='/movies' element={<><Header /><Movies /><Footer /></>} />
             <Route path='/saved-movies' element={<><Header /><SavedMovies /><Footer /></>} />
             <Route path='/profile' element={<><Header /><Profile /></>} />
 

@@ -5,7 +5,7 @@ import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import More from './More/More';
 import Preloader from './Preloader/Preloader';
 import { getResults, saveCheckbox, saveResults, saveSearchString } from '../../utils/storage';
-import { moviesApi } from '../../utils/MoviesApi';
+import { searchMovies } from '../../utils/search';
 
 function Movies({ buttonModifier = 'movies-card__like' }) {
 
@@ -33,21 +33,17 @@ function Movies({ buttonModifier = 'movies-card__like' }) {
     async function doSearch(searchText, isShortMeter) {
         //    console.log(searchText, isShortMeter);
         if (!searchText) return;
+        setPreloader(true);
+        const filteredMovies = await searchMovies(searchText, isShortMeter);
+
+        setMoviesMessage(filteredMovies.message)
+
+        setMovies(filteredMovies.data);
+
+        saveResults(filteredMovies.data);
         saveSearchString(searchText);
         saveCheckbox(isShortMeter);
-        setMoviesMessage('');
-        setPreloader(true);
-        try {
-            const results = await moviesApi.search(searchText);
-            const filteredMovies = results.filter(movie =>
-                ((isShortMeter && movie.duration < 41) || !isShortMeter)
-                && movie.nameRU.toLowerCase().includes(searchText.toLowerCase()));
-            setMovies(filteredMovies);
-            saveResults(filteredMovies);
-            if (filteredMovies.length === 0) setMoviesMessage('Ничего не найдено');
-        } catch (error) {
-            setMoviesMessage('Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз');
-        }
+
         setPreloader(false);
     }
 
