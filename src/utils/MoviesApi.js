@@ -12,6 +12,10 @@ class MoviesApi extends Api {
         });
     }
 
+    search() {
+        return this._makeRequest(this._baseUrl, {})
+    }
+
 }
 
 export const moviesApi = new MoviesApi(moviesUrl);
