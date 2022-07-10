@@ -16,6 +16,8 @@ import { mainApi } from '../../utils/MainApi';
 import { doLogin } from '../../utils/auth';
 import { searchMovies } from '../../utils/search';
 import { saveSearchString, saveResults, saveCheckbox } from '../../utils/storage';
+import { ERRORS } from '../../utils/errorTexts';
+
 
 
 function App() {
@@ -47,7 +49,7 @@ function App() {
       saveCheckbox(isShortMeter);
       return filteredMovies;
     } catch (error) {
-      return { message: 'Что-то пошло не так', data: [] };
+      return { message: ERRORS.MOVIES_API_GENERAL_ERROR, data: [] };
     }
   }
 

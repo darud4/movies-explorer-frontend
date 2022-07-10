@@ -1,4 +1,5 @@
 import { moviesApi } from "./MoviesApi";
+import { ERRORS } from "./errorTexts";
 
 export async function searchMovies(searchText, isShortMeter) {
     const result = { data: [], message: '' };
@@ -10,7 +11,7 @@ export async function searchMovies(searchText, isShortMeter) {
         if (filteredMovies.length === 0) result.message = 'Ничего не найдено';
         result.data = filteredMovies;
     } catch (error) {
-        result.message = 'Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз';
+        result.message = ERRORS.MOVIES_API_GENERAL_ERROR;
     }
     return result;
 }

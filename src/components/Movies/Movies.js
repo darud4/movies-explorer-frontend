@@ -5,6 +5,7 @@ import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import More from './More/More';
 import Preloader from './Preloader/Preloader';
 import { getResults } from '../../utils/storage';
+import { ERRORS } from '../../utils/errorTexts';
 
 function Movies({ buttonModifier = 'movies-card__like', onSearch }) {
 
@@ -36,7 +37,7 @@ function Movies({ buttonModifier = 'movies-card__like', onSearch }) {
             setMoviesMessage(filteredMovies.message)
             setMovies(filteredMovies.data);
         } catch (error) {
-            setMoviesMessage('Что-то пошло не так');
+            setMoviesMessage(ERRORS.MOVIES_API_GENERAL_ERROR);
         }
         setPreloader(false);
     }
