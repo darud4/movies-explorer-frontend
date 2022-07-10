@@ -16,7 +16,17 @@ function InputForm({ inputs, values = {}, errors = {}, isValid, onChange, onSubm
         <Logo />
         <h1 className="title">{title}</h1>
         <fieldset className="input-form__inputs">
-            {inputs.map(({ caption, name, type = 'text', id }) => <Input key={id} type={type} label={caption} name={name} onChange={onChange} value={values[name]} error={errors[name]} />)}
+            {inputs.map(({ caption, name, type = 'text', id, pattern = '' }) =>
+                <Input
+                    key={id}
+                    type={type}
+                    label={caption}
+                    name={name}
+                    onChange={onChange}
+                    value={values[name]}
+                    error={errors[name]}
+                    pattern={pattern}
+                />)}
             <span className="input-form__error"></span>
         </fieldset>
         <fieldset className="input-form__buttons">

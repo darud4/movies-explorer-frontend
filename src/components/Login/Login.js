@@ -3,7 +3,7 @@ import InputForm from '../InputForm/InputForm';
 import useFormWithValidation from '../useFormWithValidation/useFormWithValidation';
 import React from 'react';
 
-const inputs = [{ caption: 'E-mail', name: 'email', type: 'email', id: 1 }, { caption: "Пароль", name: 'password', type: 'password', id: 2 }];
+const inputs = [{ caption: 'E-mail', name: 'email', type: 'email', id: 1, pattern: `[^@\\s]+@[^@\\s]+\\.[^@\\s]+` }, { caption: "Пароль", name: 'password', type: 'password', id: 2 }];
 
 function Login({ onSubmit }) {
 
