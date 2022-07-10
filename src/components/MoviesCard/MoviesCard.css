@@ -69,6 +69,12 @@
   background-image: url(../../images/icon-cross.svg);
 }
 
+@media screen and (max-width: 606px) {
+  .movies-card__image {
+    height: 50vw;
+  }
+}
+
 @media screen and (max-width: 400px) {
   .movies-card__name {
     font-size: 12px;
