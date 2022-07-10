@@ -1,8 +1,8 @@
 import './More.css';
 
-function More({ isVisible }) {
+function More({ isVisible, onClick }) {
     return (isVisible && <section className='more'>
-        <button className="more__button" type="button">Ещё</button>
+        <button className="more__button" type="button" onClick={onClick}>Ещё</button>
     </section>);
 }
 

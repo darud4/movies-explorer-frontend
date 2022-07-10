@@ -2,13 +2,31 @@ import './Movies.css'
 import SearchForm from './SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import More from './More/More';
-//const defaultCards = [{ name: 'Когда я думаю о Германии ночью' }, { name: 'Дженис: Маленькая девочка грустит' }, { name: '33 слова о дизайне' }, { name: 'Дженис: Маленькая девочка грустит' }, { name: 'Дженис: Маленькая девочка грустит' }, { name: 'Баския: Взрыв реальности' }, { name: 'В погоне за Бенкси' }, { name: 'Киноальманах «100 лет дизайна»' },];
+import { useState, useEffect } from 'react';
 
 function Movies({ movies = [], buttonModifier = 'movies-card__like', onSearch }) {
 
+    const [moviesToShow, setMoviesToShow] = useState(3);
+
+    useEffect(() => {
+        if (movies.length === 0) return;
+        setMoviesToShow(3);
+    }, [movies]);
 
     function handleSubmit(searchText) {
         onSearch && onSearch(searchText);
+    }
+
+    function getMoviesToAdd() {
+        return 3;
+    }
+
+    function handleMore() {
+        console.log(moviesToShow, movies.length)
+        if (moviesToShow === movies.length) return;
+        const moviesToAdd = getMoviesToAdd();
+        console.log(Math.min(moviesToShow + moviesToAdd, movies.length));
+        setMoviesToShow(Math.min(moviesToShow + moviesToAdd, movies.length));
     }
 
     return (<main className="movies">
@@ -16,8 +34,9 @@ function Movies({ movies = [], buttonModifier = 'movies-card__like', onSearch })
         <MoviesCardList
             movies={movies}
             buttonClassName={buttonModifier}
+            moviesToShow={moviesToShow}
         />
-        <More isVisible={movies.length > 0} />
+        <More isVisible={movies.length > 0 && moviesToShow < movies.length} onClick={handleMore} />
     </main>);
 
 }
