@@ -20,7 +20,8 @@ function SearchForm({ onSubmit }) {
         evt.preventDefault();
         if (!evt.target.checkValidity()) { setError('Нужно ввести ключевое слово'); return; }
         setError('');
-        onSubmit && onSubmit(inputRef.current.value);
+//        console.log(inputRef.current.value, isChecked);
+        onSubmit && onSubmit(inputRef.current.value, isChecked);
     }
 
     function handleInput() { setError(''); }

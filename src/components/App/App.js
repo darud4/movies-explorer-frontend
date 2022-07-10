@@ -39,11 +39,15 @@ function App() {
 
   }
 
-  async function doSearch(searchText) {
+  async function doSearch(searchText, isShortMeter) {
+//    console.log(searchText, isShortMeter);
+    if (!searchText) return;
     setPreloader(true);
     try {
       const results = await moviesApi.search(searchText);
-      setMovies(results.filter(movie => movie.nameRU.includes(searchText)));
+      setMovies(results.filter(movie =>
+        ((isShortMeter && movie.duration < 41) || !isShortMeter)
+        && movie.nameRU.toLowerCase().includes(searchText.toLowerCase())));
     } catch (error) {
 
     }

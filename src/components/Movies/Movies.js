@@ -24,8 +24,8 @@ function Movies({ movies = [], buttonModifier = 'movies-card__like', onSearch, i
     }, [movies]);
 
 
-    function handleSubmit(searchText) {
-        onSearch && onSearch(searchText);
+    function handleSubmit(searchText, shortMeter) {
+        onSearch && onSearch(searchText, shortMeter);
     }
 
     const getMoviesToAdd = (columnsString) => {
