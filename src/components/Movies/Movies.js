@@ -1,10 +1,11 @@
 import './Movies.css'
+import { useState, useEffect } from 'react';
 import SearchForm from './SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import More from './More/More';
-import { useState, useEffect } from 'react';
+import Preloader from './Preloader/Preloader';
 
-function Movies({ movies = [], buttonModifier = 'movies-card__like', onSearch }) {
+function Movies({ movies = [], buttonModifier = 'movies-card__like', onSearch, isPreloader }) {
 
     const [moviesToShow, setMoviesToShow] = useState(3);
 
@@ -18,7 +19,7 @@ function Movies({ movies = [], buttonModifier = 'movies-card__like', onSearch })
     }
 
     function getMoviesToAdd() {
-//        console.log(getComputedStyle(moviesRef.current).getPropertyValue('grid-template-rows'));
+        //        console.log(getComputedStyle(moviesRef.current).getPropertyValue('grid-template-rows'));
         return 3;
     }
 
@@ -32,12 +33,16 @@ function Movies({ movies = [], buttonModifier = 'movies-card__like', onSearch })
 
     return (<main className="movies">
         <SearchForm onSubmit={handleSubmit} />
-        <MoviesCardList
-            movies={movies}
-            buttonClassName={buttonModifier}
-            moviesToShow={moviesToShow}
-        />
-        <More isVisible={movies.length > 0 && moviesToShow < movies.length} onClick={handleMore} />
+        {isPreloader ? <Preloader /> :
+            <>
+                <MoviesCardList
+                    movies={movies}
+                    buttonClassName={buttonModifier}
+                    moviesToShow={moviesToShow}
+                />
+                <More isVisible={movies.length > 0 && moviesToShow < movies.length} onClick={handleMore} />
+            </>
+        }
     </main>);
 
 }

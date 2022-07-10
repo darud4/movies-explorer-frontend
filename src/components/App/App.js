@@ -21,6 +21,7 @@ function App() {
   const [isErrorPopup, setErrorPopup] = useState(false);
   const [currentUser, setCurrentUser] = useState({});
   const [movies, setMovies] = useState([]);
+  const [isPreloader, setPreloader] = useState(false);
 
   const closeErrorPopup = () => setErrorPopup(false);
 
@@ -39,10 +40,14 @@ function App() {
   }
 
   async function doSearch(searchText) {
-    console.log(searchText);
-    const results = await moviesApi.search(searchText);
-    console.log(results);
-    setMovies(results.filter(movie => movie.nameRU.includes(searchText)));
+    setPreloader(true);
+    try {
+      const results = await moviesApi.search(searchText);
+      setMovies(results.filter(movie => movie.nameRU.includes(searchText)));
+    } catch (error) {
+
+    }
+    setPreloader(false);
   }
 
   return (
@@ -54,7 +59,7 @@ function App() {
             <Route path='/' element={<><Header isLogged={false} /><Main /><Footer /></>} />
             <Route path='/signin' element={<Login onSubmit={handleLogin} />} />
             <Route path='/signup' element={<Register onSubmit={handleRegister} />} />
-            <Route path='/movies' element={<><Header /><Movies onSearch={doSearch} movies={movies} /><Footer /></>} />
+            <Route path='/movies' element={<><Header /><Movies onSearch={doSearch} movies={movies} isPreloader={isPreloader} /><Footer /></>} />
             <Route path='/saved-movies' element={<><Header /><SavedMovies /><Footer /></>} />
             <Route path='/profile' element={<><Header /><Profile /></>} />
 
