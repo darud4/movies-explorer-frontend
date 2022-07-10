@@ -18,7 +18,7 @@ function MoviesCard({
 
     const cl = `movies-card__like ${buttonClassName}`;
     return (<li className="movies-card">
-        <a href={link} className="movies-card__img-link">
+        <a target="_blank" href={link} className="movies-card__img-link" rel="noreferrer">
             <img className="movies-card__image" alt={name} src={`${imgUrl}${image}`} />
         </a>
         <span className="movies-card__name">{name}</span>
