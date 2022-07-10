@@ -2,7 +2,11 @@ import { useEffect } from 'react';
 import InputForm from '../InputForm/InputForm';
 import useFormWithValidation from '../useFormWithValidation/useFormWithValidation';
 
-const inputs = [{ caption: "Имя", name: "name", id: 1 }, { caption: 'E-mail', name: 'email', type: 'email', id: 2 }, { caption: "Пароль", name: 'password', id: 3 }];
+const inputs = [
+    { caption: "Имя", name: "name", id: 1 },
+    { caption: 'E-mail', name: 'email', type: 'email', id: 2, pattern: `[^@\\s]+@[^@\\s]+\\.[^@\\s]+` },
+    { caption: "Пароль", name: 'password', id: 3 }
+];
 
 function Register() {
 
