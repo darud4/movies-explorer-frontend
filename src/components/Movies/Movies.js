@@ -18,6 +18,7 @@ function Movies({ movies = [], buttonModifier = 'movies-card__like', onSearch })
     }
 
     function getMoviesToAdd() {
+//        console.log(getComputedStyle(moviesRef.current).getPropertyValue('grid-template-rows'));
         return 3;
     }
 
