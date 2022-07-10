@@ -1,5 +1,5 @@
 import './Movies.css'
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import SearchForm from './SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import More from './More/More';
@@ -7,27 +7,36 @@ import Preloader from './Preloader/Preloader';
 
 function Movies({ movies = [], buttonModifier = 'movies-card__like', onSearch, isPreloader }) {
 
-    const [moviesToShow, setMoviesToShow] = useState(3);
+    const [moviesToShow, setMoviesToShow] = useState(0);
+
+    const moviesRef = useRef();
 
     useEffect(() => {
+
+        function getInitialNumber() {
+            if (window.innerWidth >= 1280) return 12;
+            if (window.innerWidth >= 768) return 8;
+            return 5;
+        }
+
         if (movies.length === 0) return;
-        setMoviesToShow(3);
+        setMoviesToShow(Math.min(getInitialNumber(), movies.length));
     }, [movies]);
+
 
     function handleSubmit(searchText) {
         onSearch && onSearch(searchText);
     }
 
-    function getMoviesToAdd() {
-        //        console.log(getComputedStyle(moviesRef.current).getPropertyValue('grid-template-rows'));
-        return 3;
+    const getMoviesToAdd = (columnsString) => {
+        if (!columnsString) return;
+        const columnsCount = columnsString.split(' ').length;
+        return Math.max(columnsCount, 2);
     }
 
     function handleMore() {
-        console.log(moviesToShow, movies.length)
         if (moviesToShow === movies.length) return;
-        const moviesToAdd = getMoviesToAdd();
-        console.log(Math.min(moviesToShow + moviesToAdd, movies.length));
+        const moviesToAdd = getMoviesToAdd(getComputedStyle(moviesRef.current).getPropertyValue("grid-template-columns"));
         setMoviesToShow(Math.min(moviesToShow + moviesToAdd, movies.length));
     }
 
@@ -36,6 +45,7 @@ function Movies({ movies = [], buttonModifier = 'movies-card__like', onSearch, i
         {isPreloader ? <Preloader /> :
             <>
                 <MoviesCardList
+                    ref={moviesRef}
                     movies={movies}
                     buttonClassName={buttonModifier}
                     moviesToShow={moviesToShow}

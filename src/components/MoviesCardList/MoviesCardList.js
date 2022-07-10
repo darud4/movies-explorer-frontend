@@ -1,10 +1,10 @@
 import './MoviesCardList.css';
+import { forwardRef } from 'react';
 import MoviesCard from '../MoviesCard/MoviesCard';
 
 
-function MoviesCardList({ moviesToShow, movies = [], buttonClassName }) {
-    //    console.log(movies);
-    return (<ul className="movies-card-list">
+const MoviesCardList = forwardRef(({ moviesToShow, movies = [], buttonClassName }, ref) => {
+    return (<ul className="movies-card-list" ref={ref}>
         {movies.map(({ image, nameRU: name, duration, trailerLink }, i) =>
         (i < moviesToShow && <MoviesCard
             key={i}
@@ -16,6 +16,6 @@ function MoviesCardList({ moviesToShow, movies = [], buttonClassName }) {
         />))
         }
     </ul>);
-}
+});
 
 export default MoviesCardList;
