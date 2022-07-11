@@ -13,7 +13,7 @@ import Profile from '../Profile/Profile';
 import Popup from '../Popup/Popup';
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import { mainApi } from '../../utils/MainApi';
-import { doLogin } from '../../utils/auth';
+import { doLogin, doSignup } from '../../utils/auth';
 import { searchMovies } from '../../utils/search';
 import { saveSearchString, saveResults, saveCheckbox } from '../../utils/storage';
 import { ERRORS } from '../../utils/errorTexts';
@@ -37,8 +37,16 @@ function App() {
     }
   }
 
-  function handleRegister({ name, email, password }) {
-
+  async function handleRegister({ name, email, password }) {
+    try {
+      const { data } = await doSignup({ name, email, password });
+      if (!data._id) throw Error('Ошибка при авторизации');
+      
+      return true;
+    }
+    catch (error) {
+      return false;
+    }
   }
 
   async function doSearch(searchText, isShortMeter) {
