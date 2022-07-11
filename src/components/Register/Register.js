@@ -5,10 +5,10 @@ import useFormWithValidation from '../useFormWithValidation/useFormWithValidatio
 const inputs = [
     { caption: "Имя", name: "name", id: 1 },
     { caption: 'E-mail', name: 'email', type: 'email', id: 2, pattern: `[^@\\s]+@[^@\\s]+\\.[^@\\s]+` },
-    { caption: "Пароль", name: 'password', id: 3 }
+    { caption: "Пароль", name: 'password', id: 3, type: 'password' }
 ];
 
-function Register() {
+function Register({ onSubmit }) {
 
     const { values, errors, isValid, handleChange, resetForm } = useFormWithValidation();
 
@@ -26,6 +26,7 @@ function Register() {
         errors={errors}
         isValid={isValid}
         onChange={handleChange}
+        onSubmit={onSubmit}
     />);
 }
 

@@ -15,6 +15,7 @@ class MainApi extends Api {
     setToken(token) {
         this._headers.authorization = `Bearer ${token}`;
     }
+
 }
 
 export const mainApi = new MainApi(baseUrl);

@@ -33,7 +33,7 @@ export function doLogin(email, password) {
     return makeRequest(url, props);
 }
 
-export function doSignup(email, password, name) {
+export function doSignup({ email, password, name }) {
     const url = baseUrl + '/signup';
     const headers = {
         "Content-Type": "application/json"
