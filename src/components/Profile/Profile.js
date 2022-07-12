@@ -3,6 +3,7 @@ import '../Title/Title.css';
 import ProfileInput from './ProfileInput/ProfileInput';
 import { useState, useContext, useEffect } from 'react';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
+import { decodeError } from '../../utils/errorHandler';
 
 function Profile({ onLogout, onSubmit }) {
 
@@ -26,11 +27,6 @@ function Profile({ onLogout, onSubmit }) {
 
     const handleNameChange = (newVal) => setName(newVal);
     const handleEmailChange = (newVal) => setEmail(newVal);
-
-    function decodeError(error) {
-        const errors = { 401: 'Ошибка авторизации в удаленном ресурсе' };
-        return errors[error.errorCode || 'Неизвестная ошибка'];
-    }
 
     async function handleSubmit(evt) {
         setErrorText('');
