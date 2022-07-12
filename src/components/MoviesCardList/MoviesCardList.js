@@ -37,8 +37,6 @@ function MoviesCardList({ savedMovies = [], movies = [], buttonClassName, onButt
         setMoviesToShow(Math.min(moviesToShow + moviesToAdd, movies.length));
     }
 
-
-
     return (
         <>
             <ul className="movies-card-list" ref={ref}>

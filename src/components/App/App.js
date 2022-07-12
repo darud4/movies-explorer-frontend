@@ -150,11 +150,14 @@ function App() {
     }
   }
 
-
   function handleMoviesButton(movieData) {
     const savedMovie = savedMovies.find(({ movieId }) => movieId === movieData.id);
     if (savedMovie) removeFromSaved(savedMovie._id);
     else addToSaved(movieData);
+  }
+
+  function handleSavedMoviesButton(movieData) {
+    removeFromSaved(movieData._id);
   }
 
   return (
@@ -169,7 +172,7 @@ function App() {
           </Route>
           <Route element={<ProtectedRoute isAllowed={currentUser.name} redirectPath="/" />}>
             <Route path='/movies' element={<><Header /><Movies savedMovies={savedMovies} onSearch={doSearch} onButtonClick={handleMoviesButton} /><Footer /></>} />
-            <Route path='/saved-movies' element={<><Header /><SavedMovies savedMovies={savedMovies} onButtonClick={removeFromSaved} /><Footer /></>} />
+            <Route path='/saved-movies' element={<><Header /><SavedMovies savedMovies={savedMovies} onButtonClick={handleSavedMoviesButton} /><Footer /></>} />
             <Route path='/profile' element={<><Header /><Profile onLogout={doLogout} onSubmit={handleProfileChange} /></>} />
           </Route>
 
