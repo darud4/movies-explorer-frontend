@@ -4,7 +4,7 @@ import ProfileInput from './ProfileInput/ProfileInput';
 import { useState, useContext, useEffect } from 'react';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 
-function Profile() {
+function Profile({ onLogout, onSubmit }) {
 
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
@@ -21,6 +21,10 @@ function Profile() {
     const handleNameChange = (newVal) => setName(newVal);
     const handleEmailChange = (newVal) => setEmail(newVal);
 
+    function handleSubmit(evt) {
+        onSubmit && onSubmit({ name, email });
+    }
+
     return (<form className="profile" name='profile'>
         <h2 className="title">Привет, {name}</h2>
         <fieldset className="profile__inputs">
@@ -28,8 +32,8 @@ function Profile() {
             <ProfileInput caption="E-mail" name='email' placeholder='Введите адрес электронной почты' value={email} onChange={handleEmailChange} />
         </fieldset>
         <fieldset className="profile__buttons">
-            <button type="button" className="profile__button">Редактировать</button>
-            <button type="button" className="profile__button profile__button_attention">Выйти из аккаунта</button>
+            <button type="button" className="profile__button" onClick={handleSubmit}>Редактировать</button>
+            <button type="button" className="profile__button profile__button_attention" onClick={onLogout}>Выйти из аккаунта</button>
         </fieldset>
     </form>);
 }

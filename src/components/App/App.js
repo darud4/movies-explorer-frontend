@@ -87,6 +87,13 @@ function App() {
     }
   }
 
+  function doLogout() {
+    localStorage.clear();
+    mainApi.setToken('');
+    setCurrentUser({ name: '', email: '' });
+    navigate('/');
+  }
+
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="page">
@@ -97,7 +104,7 @@ function App() {
           <Route path='/signup' element={<Register onSubmit={handleRegister} />} />
           <Route path='/movies' element={<><Header /><Movies onSearch={doSearch} /><Footer /></>} />
           <Route path='/saved-movies' element={<><Header /><SavedMovies /><Footer /></>} />
-          <Route path='/profile' element={<><Header /><Profile /></>} />
+          <Route path='/profile' element={<><Header /><Profile onLogout={doLogout} /></>} />
 
           <Route path="*" element={<Page404 />} />
         </Routes>
