@@ -52,8 +52,8 @@ class MainApi extends Api {
         return this._makeRequest(url, params);
     }
 
-    removeMovieFromSaved(cardId) {
-        const url = `${this._baseUrl}/cards/${cardId}/likes`;
+    removeMovieFromSaved(id) {
+        const url = `${this._baseUrl}/movies/${id}`;
         const params = {
             method: 'DELETE',
             headers: this._headers,

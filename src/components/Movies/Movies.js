@@ -7,7 +7,7 @@ import Preloader from './Preloader/Preloader';
 import { getResults } from '../../utils/storage';
 import { ERRORS } from '../../utils/errorTexts';
 
-function Movies({ buttonModifier = 'movies-card__like', onSearch, onButtonClick }) {
+function Movies({ savedMovies, buttonModifier = 'movies-card__like', onSearch, onButtonClick }) {
 
     const [moviesToShow, setMoviesToShow] = useState(0);
     const [movies, setMovies] = useState([]);
@@ -62,6 +62,7 @@ function Movies({ buttonModifier = 'movies-card__like', onSearch, onButtonClick 
                 ? <span className="movies__message">{moviesMessage}</span>
                 : <>
                     <MoviesCardList
+                        savedMovies={savedMovies}
                         ref={moviesRef}
                         movies={movies}
                         buttonClassName={buttonModifier}

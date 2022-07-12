@@ -26,7 +26,7 @@ function App() {
 
   const [isErrorPopup, setErrorPopup] = useState(false);
   const [currentUser, setCurrentUser] = useState({ name: '', email: '' });
-  const [savedMovies, setSavedMovies] = useState([]);
+  const [savedMovies, setSavedMovies] = useState({});
 
   const navigate = useNavigate();
 
@@ -52,10 +52,13 @@ function App() {
     try {
       const { token } = await doLogin(email, password)
       console.log(token);
-      //      setJwt(token);
       mainApi.setToken(token);
       const { name } = await mainApi.getUserInfo();
       setCurrentUser({ name, email });
+      const result = await mainApi.getSavedMovies();
+      console.log(result);
+      const newSaved = result.reduce((obj, movie) => { obj[movie.movieId] = movie._id; return obj }, {});
+      setSavedMovies(newSaved);
       localStorage.clear();
       localStorage.setItem('jwt', token);
       navigate('/movies', { replace: true });
@@ -111,20 +114,34 @@ function App() {
 
   async function handleMoviesButton({
     country, director, duration, year, description,
-    image, trailerLink, nameRU, nameEN, thumbnail, id: movieId,
+    image, trailerLink, nameRU, nameEN, id: movieId,
   }) {
-    try {
-      const imageUrl = `${imgUrl}${image.url}`;
-      const thumbUrl = `${imgUrl}${image.formats.thumbnail.url}`;
-      const result = await mainApi.addMovieToSaved({
-        country, director, duration, year, description,
-        image: imageUrl, trailerLink, nameRU, nameEN, thumbnail: thumbUrl, movieId,
-      });
-      console.log(result);
-    }
-    catch (error) {
-      console.log(error);
-    }
+    const savedMovieOurId = savedMovies[movieId];
+//    console.log(country);
+    if (savedMovieOurId)
+      try {
+        const { movieId: theirId } = await mainApi.removeMovieFromSaved(savedMovieOurId);
+        setSavedMovies(newState => {
+          const { [theirId]: _, ...rest } = newState;
+          return rest;
+        });
+      }
+      catch (error) {
+        console.log('remove from saved', error);
+      }
+    else
+      try {
+        const imageUrl = `${imgUrl}${image.url}`;
+        const thumbUrl = `${imgUrl}${image.formats.thumbnail.url}`;
+        const { _id: ourId, movieId: theirId } = await mainApi.addMovieToSaved({
+          country: country || 'не указано', director, duration, year, description,
+          image: imageUrl, trailerLink, nameRU, nameEN, thumbnail: thumbUrl, movieId,
+        });
+        setSavedMovies(newState => ({ [theirId]: ourId, ...newState }));
+      }
+      catch (error) {
+        console.log('add to saved', error);
+      }
   }
 
   return (
@@ -138,7 +155,7 @@ function App() {
             <Route path='/signup' element={<Register onSubmit={handleRegister} />} />
           </Route>
           <Route element={<ProtectedRoute isAllowed={currentUser.name} redirectPath="/" />}>
-            <Route path='/movies' element={<><Header /><Movies onSearch={doSearch} onButtonClick={handleMoviesButton} /><Footer /></>} />
+            <Route path='/movies' element={<><Header /><Movies savedMovies={savedMovies} onSearch={doSearch} onButtonClick={handleMoviesButton} /><Footer /></>} />
             <Route path='/saved-movies' element={<><Header /><SavedMovies /><Footer /></>} />
             <Route path='/profile' element={<><Header /><Profile onLogout={doLogout} onSubmit={handleProfileChange} /></>} />
           </Route>
