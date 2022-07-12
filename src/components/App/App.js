@@ -11,6 +11,7 @@ import Register from '../Register/Register';
 import Page404 from '../Page404/Page404';
 import Profile from '../Profile/Profile';
 import Popup from '../Popup/Popup';
+import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import { mainApi } from '../../utils/MainApi';
 import { doLogin, doSignup, checkToken as validateToken } from '../../utils/auth';
@@ -108,12 +109,16 @@ function App() {
       <div className="page">
         <Popup titleText="Какая-то ошибка" popupText="Текст какой-то ошбики" submitText="ОК" onClose={closeErrorPopup} isOpen={isErrorPopup} />
         <Routes>
-          <Route path='/' element={<><Header isLogged={false} /><Main /><Footer /></>} />
-          <Route path='/signin' element={<Login onSubmit={handleLogin} />} />
-          <Route path='/signup' element={<Register onSubmit={handleRegister} />} />
-          <Route path='/movies' element={<><Header /><Movies onSearch={doSearch} /><Footer /></>} />
-          <Route path='/saved-movies' element={<><Header /><SavedMovies /><Footer /></>} />
-          <Route path='/profile' element={<><Header /><Profile onLogout={doLogout} onSubmit={handleProfileChange} /></>} />
+          <Route element={<ProtectedRoute isAllowed={!currentUser.name} redirectPath="/movies" />}>
+            <Route path='/' element={<><Header isLogged={false} /><Main /><Footer /></>} />
+            <Route path='/signin' element={<Login onSubmit={handleLogin} />} />
+            <Route path='/signup' element={<Register onSubmit={handleRegister} />} />
+          </Route>
+          <Route element={<ProtectedRoute isAllowed={currentUser.name} redirectPath="/" />}>
+            <Route path='/movies' element={<><Header /><Movies onSearch={doSearch} /><Footer /></>} />
+            <Route path='/saved-movies' element={<><Header /><SavedMovies /><Footer /></>} />
+            <Route path='/profile' element={<><Header /><Profile onLogout={doLogout} onSubmit={handleProfileChange} /></>} />
+          </Route>
 
           <Route path="*" element={<Page404 />} />
         </Routes>
