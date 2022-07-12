@@ -24,9 +24,12 @@ import { ERRORS } from '../../utils/errorTexts';
 function App() {
 
   const [isErrorPopup, setErrorPopup] = useState(false);
-  const [currentUser, setCurrentUser] = useState({});
+  const [currentUser, setCurrentUser] = useState({ name: '', email: '' });
+  const [savedMovies, setSavedMovies] = useState([]);
 
   const navigate = useNavigate();
+
+  useEffect(() => { }, []);
 
   const closeErrorPopup = () => setErrorPopup(false);
 
@@ -99,9 +102,21 @@ function App() {
     try {
       const result = await mainApi.setUserInfo(userData);
       //      console.log(result);
+      if (!result._id) throw new Error('Ошибка при обновлении профиля');
       setCurrentUser(userData);
       return { ok: true };
     } catch (error) { console.log(error); return { ok: false, error } }
+  }
+
+  async function handleMoviesButton(movieData) {
+    console.log(movieData);
+    try {
+      const result = await mainApi.addMovieToSaved(movieData);
+      console.log(result);
+    }
+    catch (error) {
+      console.log(error);
+    }
   }
 
   return (
@@ -115,7 +130,7 @@ function App() {
             <Route path='/signup' element={<Register onSubmit={handleRegister} />} />
           </Route>
           <Route element={<ProtectedRoute isAllowed={currentUser.name} redirectPath="/" />}>
-            <Route path='/movies' element={<><Header /><Movies onSearch={doSearch} /><Footer /></>} />
+            <Route path='/movies' element={<><Header /><Movies onSearch={doSearch} onButtonClick={handleMoviesButton} /><Footer /></>} />
             <Route path='/saved-movies' element={<><Header /><SavedMovies /><Footer /></>} />
             <Route path='/profile' element={<><Header /><Profile onLogout={doLogout} onSubmit={handleProfileChange} /></>} />
           </Route>

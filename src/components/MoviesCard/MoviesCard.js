@@ -3,15 +3,13 @@ import { CONFIG } from '../../config';
 
 const { imgUrl } = CONFIG;
 
-//import picExample from '../../images/stopframe.png';
-//import { useState } from 'react';
-
 function MoviesCard({
     buttonClassName,
     image,
     name = '',
     duration = '',
-    link
+    link,
+    onButtonClick
 }) {
 
     const newDuration = `${Math.floor(duration / 60) + 'ч '}${Math.floor(duration % 60) + 'м'}`;
@@ -22,7 +20,7 @@ function MoviesCard({
             <img className="movies-card__image" alt={name} src={`${imgUrl}${image}`} />
         </a>
         <span className="movies-card__name">{name}</span>
-        <button className={cl} type="button"></button>
+        <button className={cl} type="button" onClick={onButtonClick}></button>
         <p className="movies-card__duration">{newDuration}</p>
     </li>);
 }

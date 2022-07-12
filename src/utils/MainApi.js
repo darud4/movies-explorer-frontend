@@ -16,6 +16,14 @@ class MainApi extends Api {
         this._headers.authorization = `Bearer ${token}`;
     }
 
+    getSavedMovies() {
+        const url = `${this._baseUrl}/movies`;
+        const params = {
+            headers: { authorization: this._headers.authorization }
+        };
+        return this._makeRequest(url, params);
+    }
+
     getUserInfo() {
         const url = `${this._baseUrl}/users/me`;
         const params = {
@@ -34,11 +42,12 @@ class MainApi extends Api {
         return this._makeRequest(url, params);
     }
 
-    addMovieToSaved(cardId) {
-        const url = `${this._baseUrl}/cards/${cardId}/likes`;
+    addMovieToSaved(movieData) {
+        const url = `${this._baseUrl}/movies`;
         const params = {
-            method: 'PUT',
+            method: 'POST',
             headers: this._headers,
+            body: JSON.stringify(movieData)
         };
         return this._makeRequest(url, params);
     }

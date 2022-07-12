@@ -7,7 +7,7 @@ import Preloader from './Preloader/Preloader';
 import { getResults } from '../../utils/storage';
 import { ERRORS } from '../../utils/errorTexts';
 
-function Movies({ buttonModifier = 'movies-card__like', onSearch }) {
+function Movies({ buttonModifier = 'movies-card__like', onSearch, onButtonClick }) {
 
     const [moviesToShow, setMoviesToShow] = useState(0);
     const [movies, setMovies] = useState([]);
@@ -66,6 +66,7 @@ function Movies({ buttonModifier = 'movies-card__like', onSearch }) {
                         movies={movies}
                         buttonClassName={buttonModifier}
                         moviesToShow={moviesToShow}
+                        onButtonClick={onButtonClick}
                     />
                     <More isVisible={movies.length > 0 && moviesToShow < movies.length} onClick={handleMore} />
                 </>
