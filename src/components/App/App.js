@@ -26,27 +26,38 @@ function App() {
 
   const [isErrorPopup, setErrorPopup] = useState(false);
   const [currentUser, setCurrentUser] = useState({ name: '', email: '' });
-  const [savedMovies, setSavedMovies] = useState({});
+  const [savedMovies, setSavedMovies] = useState([]);
 
   const navigate = useNavigate();
 
-  useEffect(() => { }, []);
-
   const closeErrorPopup = () => setErrorPopup(false);
 
+  const getSavedMovies = useCallback(async () => {
+    const result = await mainApi.getSavedMovies();
+    //    console.log(result);
+    setSavedMovies(result);
+  }, []);
+
   const checkToken = useCallback(async (token) => {
+    console.log('checkToken fired');
     try {
-      const { email, name, ...loginData } = await validateToken(token)
+      const { email, name } = await validateToken(token)
       if (!email) throw Error('Что-то пошло не так');
-      console.log(name, email, token, loginData);
+      //      console.log(name, email, token, loginData);
       //      setJwt(token);
       mainApi.setToken(token);
       setCurrentUser({ name, email });
+      getSavedMovies();
       //      setLoggedIn(true);
       navigate('/movies', { replace: true });
     }
     catch (error) { console.log(error) };
-  }, [navigate]);
+  }, [getSavedMovies]);
+
+  useEffect(() => {
+    const jwt = localStorage.getItem('jwt');
+    if (jwt) checkToken(jwt);
+  }, [checkToken]);
 
   async function handleLogin({ email, password }) {
     try {
@@ -55,10 +66,7 @@ function App() {
       mainApi.setToken(token);
       const { name } = await mainApi.getUserInfo();
       setCurrentUser({ name, email });
-      const result = await mainApi.getSavedMovies();
-      console.log(result);
-      const newSaved = result.reduce((obj, movie) => { obj[movie.movieId] = movie._id; return obj }, {});
-      setSavedMovies(newSaved);
+      getSavedMovies();
       localStorage.clear();
       localStorage.setItem('jwt', token);
       navigate('/movies', { replace: true });
@@ -112,36 +120,41 @@ function App() {
     } catch (error) { console.log(error); return { ok: false, error } }
   }
 
-  async function handleMoviesButton({
-    country, director, duration, year, description,
-    image, trailerLink, nameRU, nameEN, id: movieId,
-  }) {
-    const savedMovieOurId = savedMovies[movieId];
-//    console.log(country);
-    if (savedMovieOurId)
-      try {
-        const { movieId: theirId } = await mainApi.removeMovieFromSaved(savedMovieOurId);
-        setSavedMovies(newState => {
-          const { [theirId]: _, ...rest } = newState;
-          return rest;
-        });
-      }
-      catch (error) {
-        console.log('remove from saved', error);
-      }
-    else
-      try {
-        const imageUrl = `${imgUrl}${image.url}`;
-        const thumbUrl = `${imgUrl}${image.formats.thumbnail.url}`;
-        const { _id: ourId, movieId: theirId } = await mainApi.addMovieToSaved({
-          country: country || 'не указано', director, duration, year, description,
-          image: imageUrl, trailerLink, nameRU, nameEN, thumbnail: thumbUrl, movieId,
-        });
-        setSavedMovies(newState => ({ [theirId]: ourId, ...newState }));
-      }
-      catch (error) {
-        console.log('add to saved', error);
-      }
+  async function removeFromSaved(ourId) {
+    try {
+      const { movieId } = await mainApi.removeMovieFromSaved(ourId);
+      if (!movieId) throw new Error('Ошибка при удалении из сохраненных фильмов');
+      getSavedMovies();
+
+    }
+    catch (error) {
+      console.log('remove from saved', error);
+    }
+
+  }
+
+  async function addToSaved({ country, director, duration, year, description,
+    image, trailerLink, nameRU, nameEN, id: movieId }) {
+    try {
+      const imageUrl = `${imgUrl}${image.url}`;
+      const thumbUrl = `${imgUrl}${image.formats.thumbnail.url}`;
+      const { movieId: theirId } = await mainApi.addMovieToSaved({
+        country: country || 'не указано', director, duration, year, description,
+        image: imageUrl, trailerLink, nameRU, nameEN, thumbnail: thumbUrl, movieId,
+      });
+      if (!theirId) throw new Error('Ошибка при добавлении в сохраненные фильмы');
+      getSavedMovies();
+    }
+    catch (error) {
+      console.log('add to saved', error);
+    }
+  }
+
+
+  function handleMoviesButton(movieData) {
+    const savedMovie = savedMovies.find(({ movieId }) => movieId === movieData.id);
+    if (savedMovie) removeFromSaved(savedMovie._id);
+    else addToSaved(movieData);
   }
 
   return (
@@ -156,7 +169,7 @@ function App() {
           </Route>
           <Route element={<ProtectedRoute isAllowed={currentUser.name} redirectPath="/" />}>
             <Route path='/movies' element={<><Header /><Movies savedMovies={savedMovies} onSearch={doSearch} onButtonClick={handleMoviesButton} /><Footer /></>} />
-            <Route path='/saved-movies' element={<><Header /><SavedMovies /><Footer /></>} />
+            <Route path='/saved-movies' element={<><Header /><SavedMovies onButtonClick={removeFromSaved} /><Footer /></>} />
             <Route path='/profile' element={<><Header /><Profile onLogout={doLogout} onSubmit={handleProfileChange} /></>} />
           </Route>
 

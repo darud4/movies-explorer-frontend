@@ -1,17 +1,27 @@
 import './SavedMovies.css'
+import { useEffect, useState } from 'react';
 import SearchForm from '../Movies/SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
-import image1 from '../../images/stopframe.png';
-import image2 from '../../images/stopframe1.png';
 
-const defaultCards = [{ name: 'Когда я думаю о Германии ночью', image: image1 }, { name: 'Дженис: Маленькая девочка грустит', image: image2 },];
+function SavedMovies({ onButtonClick }) {
 
-function SavedMovies() {
+    const [movies, setMovies] = useState([]);
+
+    useEffect(() => {
+
+        async function getSaved() {
+            
+        }
+
+        getSaved();
+    }, [setMovies]);
+
     return <main className="saved-movies">
         <SearchForm />
         <MoviesCardList
             buttonClassName='movies-card__like_remove'
-            movies={defaultCards}
+            moviesToShow={movies}
+            onButtonClick={onButtonClick}
         />
     </main>
 
