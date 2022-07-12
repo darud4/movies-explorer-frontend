@@ -1,12 +1,22 @@
 import './Profile.css';
 import '../Title/Title.css';
 import ProfileInput from './ProfileInput/ProfileInput';
-import { useState } from 'react';
+import { useState, useContext, useEffect } from 'react';
+import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 
 function Profile() {
 
-    const [name, setName] = useState('Павел');
-    const [email, setEmail] = useState('dr@dr.ru');
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
+
+    const currentUser = useContext(CurrentUserContext);
+
+    useEffect(() => {
+        if (currentUser.name) {
+            setName(currentUser.name);
+            setEmail(currentUser.email);
+        }
+    }, [currentUser]);
 
     const handleNameChange = (newVal) => setName(newVal);
     const handleEmailChange = (newVal) => setEmail(newVal);
