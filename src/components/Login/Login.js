@@ -9,7 +9,7 @@ function Login({ onSubmit }) {
 
     const { values, errors, isValid, handleChange, resetForm } = useFormWithValidation();
 
-    useEffect(() => resetForm(), []);
+    useEffect(() => resetForm(), [resetForm]);
 
     return (<InputForm
         inputs={inputs}
