@@ -1,11 +1,17 @@
 import './InputForm.css';
 import '../Title/Title.css';
 import { Link } from 'react-router-dom';
+import { useEffect } from 'react';
 import Logo from '../Logo/Logo';
 import Input from './Input/Input';
 import Button from './Button/Button';
+import useFormWithValidation from '../useFormWithValidation/useFormWithValidation';
 
-function InputForm({ inputs, values = {}, errors = {}, isValid, onChange, onSubmit, title, formName, buttonName, bottomText, bottomLink, linkTarget }) {
+function InputForm({ inputs, onSubmit, title, formName, buttonName, bottomText, bottomLink, linkTarget }) {
+
+    const { values, errors, isValid, handleChange, resetForm } = useFormWithValidation();
+
+    useEffect(() => resetForm(), [resetForm]);
 
     function handleSubmit(evt) {
         evt.preventDefault();
@@ -22,7 +28,7 @@ function InputForm({ inputs, values = {}, errors = {}, isValid, onChange, onSubm
                     type={type}
                     label={caption}
                     name={name}
-                    onChange={onChange}
+                    onChange={handleChange}
                     value={values[name]}
                     error={errors[name]}
                     validate={validate}

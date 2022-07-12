@@ -1,6 +1,4 @@
-import { useEffect } from 'react';
 import InputForm from '../InputForm/InputForm';
-import useFormWithValidation from '../useFormWithValidation/useFormWithValidation';
 import { isEmail } from '../../utils/validate';
 
 const inputs = [
@@ -10,10 +8,6 @@ const inputs = [
 
 function Login({ onSubmit }) {
 
-    const { values, errors, isValid, handleChange, resetForm } = useFormWithValidation();
-
-    useEffect(() => resetForm(), [resetForm]);
-
     return (<InputForm
         inputs={inputs}
         title="Рады видеть!"
@@ -22,10 +16,6 @@ function Login({ onSubmit }) {
         bottomText="Ещё не зарегистрированы?"
         bottomLink="Регистрация"
         linkTarget="/signup"
-        values={values}
-        errors={errors}
-        isValid={isValid}
-        onChange={handleChange}
         onSubmit={onSubmit}
     />);
 }
