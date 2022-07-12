@@ -16,7 +16,7 @@ function InputForm({ inputs, values = {}, errors = {}, isValid, onChange, onSubm
         <Logo />
         <h1 className="title">{title}</h1>
         <fieldset className="input-form__inputs">
-            {inputs.map(({ caption, name, type = 'text', id, pattern = '' }) =>
+            {inputs.map(({ caption, name, type = 'text', id, validate, validationMessage }) =>
                 <Input
                     key={id}
                     type={type}
@@ -25,7 +25,8 @@ function InputForm({ inputs, values = {}, errors = {}, isValid, onChange, onSubm
                     onChange={onChange}
                     value={values[name]}
                     error={errors[name]}
-                    pattern={pattern}
+                    validate={validate}
+                    validationMessage={validationMessage}
                 />)}
             <span className="input-form__error"></span>
         </fieldset>

@@ -94,6 +94,15 @@ function App() {
     navigate('/');
   }
 
+  async function handleProfileChange(userData) {
+    try {
+      const result = await mainApi.setUserInfo(userData);
+//      console.log(result);
+      setCurrentUser(userData);
+      return { ok: true };
+    } catch (error) { console.log(error); return { ok: false, error } }
+  }
+
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="page">
@@ -104,7 +113,7 @@ function App() {
           <Route path='/signup' element={<Register onSubmit={handleRegister} />} />
           <Route path='/movies' element={<><Header /><Movies onSearch={doSearch} /><Footer /></>} />
           <Route path='/saved-movies' element={<><Header /><SavedMovies /><Footer /></>} />
-          <Route path='/profile' element={<><Header /><Profile onLogout={doLogout} /></>} />
+          <Route path='/profile' element={<><Header /><Profile onLogout={doLogout} onSubmit={handleProfileChange} /></>} />
 
           <Route path="*" element={<Page404 />} />
         </Routes>

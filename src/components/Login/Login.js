@@ -1,9 +1,12 @@
 import { useEffect } from 'react';
 import InputForm from '../InputForm/InputForm';
 import useFormWithValidation from '../useFormWithValidation/useFormWithValidation';
-import React from 'react';
+import { isEmail } from '../../utils/validate';
 
-const inputs = [{ caption: 'E-mail', name: 'email', type: 'email', id: 1, pattern: `[^@\\s]+@[^@\\s]+\\.[^@\\s]+` }, { caption: "Пароль", name: 'password', type: 'password', id: 2 }];
+const inputs = [
+    { caption: 'E-mail', name: 'email', id: 1, validate: isEmail, validationMessage: 'Пожалуйста, введите правильный e-mail' },
+    { caption: "Пароль", name: 'password', type: 'password', id: 2 }
+];
 
 function Login({ onSubmit }) {
 

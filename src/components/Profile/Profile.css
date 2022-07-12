@@ -56,6 +56,13 @@
   font-weight: 500;
 }
 
+.profile__error {
+  color: rgba(238, 52, 101, 1);
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 16px;
+}
+
 @media screen and (max-width: 768px) {
   .profile {
     padding-top: 236px;

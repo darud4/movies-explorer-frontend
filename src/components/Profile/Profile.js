@@ -9,6 +9,7 @@ function Profile({ onLogout, onSubmit }) {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [isSubmitDisabled, setSubmitDisabled] = useState(true);
+    const [errorText, setErrorText] = useState('');
 
     const currentUser = useContext(CurrentUserContext);
 
@@ -26,17 +27,29 @@ function Profile({ onLogout, onSubmit }) {
     const handleNameChange = (newVal) => setName(newVal);
     const handleEmailChange = (newVal) => setEmail(newVal);
 
-    function handleSubmit(evt) {
-        onSubmit && onSubmit({ name, email });
+    function decodeError(error) {
+        const errors = { 401: 'Ошибка авторизации в удаленном ресурсе' };
+        return errors[error.errorCode || 'Неизвестная ошибка'];
+    }
+
+    async function handleSubmit(evt) {
+        setErrorText('');
+        const result = onSubmit && await onSubmit({ name, email });
+        //        console.log(result);
+        if (result.ok) return;
+        //        console.log(result.error);
+        setErrorText(decodeError(result.error));
+        //        debugger;
     }
 
     return (<form className="profile" name='profile'>
-        <h2 className="title">Привет, {name}</h2>
+        <h2 className="title">Привет, {currentUser.name}</h2>
         <fieldset className="profile__inputs">
             <ProfileInput caption="Имя" name='name' placeholder='Введите имя' value={name} onChange={handleNameChange} />
             <ProfileInput caption="E-mail" name='email' placeholder='Введите адрес электронной почты' value={email} onChange={handleEmailChange} />
         </fieldset>
         <fieldset className="profile__buttons">
+            <span className="profile__error">{errorText}</span>
             <button
                 type="button"
                 className={`profile__button ${isSubmitDisabled ? 'profile__button_disabled' : ''}`}
