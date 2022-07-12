@@ -1,8 +1,7 @@
 import './Movies.css'
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import SearchForm from './SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
-import More from './More/More';
 import Preloader from './Preloader/Preloader';
 import { getResults } from '../../utils/storage';
 import { ERRORS } from '../../utils/errorTexts';

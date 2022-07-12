@@ -21,10 +21,9 @@ function MoviesCardList({ savedMovies = [], movies = [], buttonClassName, onButt
     }, [movies]);
 
     function handleButtonClick(i) {
-        console.log(movies[i]);
+        //        console.log(movies[i]);
         onButtonClick(movies[i]);
     }
-    console.log(movies);
 
     const getMoviesToAdd = (columnsString) => {
         if (!columnsString) return;
@@ -38,6 +37,8 @@ function MoviesCardList({ savedMovies = [], movies = [], buttonClassName, onButt
         setMoviesToShow(Math.min(moviesToShow + moviesToAdd, movies.length));
     }
 
+
+
     return (
         <>
             <ul className="movies-card-list" ref={ref}>
@@ -47,7 +48,7 @@ function MoviesCardList({ savedMovies = [], movies = [], buttonClassName, onButt
                     image={image.url}
                     name={name}
                     duration={duration}
-                    buttonClassName={savedMovies.find(({ movieId }) => movieId === id) ? `${buttonClassName}_active` : ''}
+                    buttonClassName={savedMovies.find(({ movieId }) => movieId === id) ? `${buttonClassName} ${buttonClassName}_active` : `${buttonClassName}`}
                     link={trailerLink}
                     onButtonClick={() => handleButtonClick(i)}
                 />))

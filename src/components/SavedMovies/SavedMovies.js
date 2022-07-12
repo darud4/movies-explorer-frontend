@@ -8,7 +8,7 @@ function SavedMovies({ savedMovies, onButtonClick }) {
     return <main className="saved-movies">
         <SearchForm />
         <MoviesCardList
-            buttonClassName='movies-card__like_remove'
+            buttonClassName='movies-card__like movies-card__like_remove'
             movies={savedMovies}
             onButtonClick={onButtonClick}
         />
