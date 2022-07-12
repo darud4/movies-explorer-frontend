@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 import Logo from '../Logo/Logo';
 import Input from './Input/Input';
 import Button from './Button/Button';
-import useFormWithValidation from '../useFormWithValidation/useFormWithValidation';
+import useFormWithValidation from '../../hooks/useFormWithValidation/useFormWithValidation';
 import { decodeError } from '../../utils/errorHandler';
 
 function InputForm({ inputs, onSubmit, title, formName, buttonName, bottomText, bottomLink, linkTarget }) {
