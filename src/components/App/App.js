@@ -54,11 +54,11 @@ function App() {
       localStorage.clear();
       localStorage.setItem('jwt', token);
       navigate('/movies', { replace: true });
-      return true;
+      return { ok: true };
     }
-    catch (err) {
-      console.log(err);
-      return false;
+    catch (error) {
+      console.log(error);
+      return { ok: false, error };
     }
   }
 
@@ -67,11 +67,11 @@ function App() {
       const { data } = await doSignup({ name, email, password });
       if (!data._id) throw Error('Ошибка при авторизации');
       handleLogin({ email, password })
-      return true;
+      return { ok: true };
     }
     catch (error) {
       console.log('Some error', error);
-      return false;
+      return { ok: false, error };
     }
   }
 
@@ -97,7 +97,7 @@ function App() {
   async function handleProfileChange(userData) {
     try {
       const result = await mainApi.setUserInfo(userData);
-//      console.log(result);
+      //      console.log(result);
       setCurrentUser(userData);
       return { ok: true };
     } catch (error) { console.log(error); return { ok: false, error } }

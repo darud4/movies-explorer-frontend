@@ -1,21 +1,29 @@
 import './InputForm.css';
 import '../Title/Title.css';
 import { Link } from 'react-router-dom';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import Logo from '../Logo/Logo';
 import Input from './Input/Input';
 import Button from './Button/Button';
 import useFormWithValidation from '../useFormWithValidation/useFormWithValidation';
+import { decodeError } from '../../utils/errorHandler';
 
 function InputForm({ inputs, onSubmit, title, formName, buttonName, bottomText, bottomLink, linkTarget }) {
 
     const { values, errors, isValid, handleChange, resetForm } = useFormWithValidation();
-
+    const [errorText, setErrorText] = useState('');
     useEffect(() => resetForm(), [resetForm]);
 
-    function handleSubmit(evt) {
+    async function handleSubmit(evt) {
         evt.preventDefault();
-        onSubmit && onSubmit(values);
+        setErrorText('');
+        try {
+            const result = onSubmit && await onSubmit(values);
+            if (!result || !result.ok) throw new Error(decodeError(result.error));
+        } catch (error) {
+            console.log(error);
+            setErrorText(error.message || 'Неизвестная ошибка');
+        }
     }
 
     return (<form noValidate className="input-form" name={formName} onSubmit={handleSubmit}>
@@ -34,7 +42,7 @@ function InputForm({ inputs, onSubmit, title, formName, buttonName, bottomText, 
                     validate={validate}
                     validationMessage={validationMessage}
                 />)}
-            <span className="input-form__error"></span>
+            <span className="input-form__error">{errorText}</span>
         </fieldset>
         <fieldset className="input-form__buttons">
             <Button caption={buttonName} isValid={isValid} />
