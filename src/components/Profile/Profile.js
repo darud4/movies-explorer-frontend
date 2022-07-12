@@ -8,6 +8,7 @@ function Profile({ onLogout, onSubmit }) {
 
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
+    const [isSubmitDisabled, setSubmitDisabled] = useState(true);
 
     const currentUser = useContext(CurrentUserContext);
 
@@ -17,6 +18,10 @@ function Profile({ onLogout, onSubmit }) {
             setEmail(currentUser.email);
         }
     }, [currentUser]);
+
+    useEffect(() => {
+        setSubmitDisabled(name === (currentUser.name || '') && email === (currentUser.email || ''));
+    }, [name, email, currentUser.name, currentUser.email]);
 
     const handleNameChange = (newVal) => setName(newVal);
     const handleEmailChange = (newVal) => setEmail(newVal);
@@ -32,8 +37,19 @@ function Profile({ onLogout, onSubmit }) {
             <ProfileInput caption="E-mail" name='email' placeholder='Введите адрес электронной почты' value={email} onChange={handleEmailChange} />
         </fieldset>
         <fieldset className="profile__buttons">
-            <button type="button" className="profile__button" onClick={handleSubmit}>Редактировать</button>
-            <button type="button" className="profile__button profile__button_attention" onClick={onLogout}>Выйти из аккаунта</button>
+            <button
+                type="button"
+                className={`profile__button ${isSubmitDisabled ? 'profile__button_disabled' : ''}`}
+                disabled={isSubmitDisabled}
+                onClick={handleSubmit}>
+                Редактировать
+            </button>
+            <button
+                type="button"
+                className="profile__button profile__button_attention"
+                onClick={onLogout}>
+                Выйти из аккаунта
+            </button>
         </fieldset>
     </form>);
 }
