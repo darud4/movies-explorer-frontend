@@ -9,26 +9,14 @@ import { ERRORS } from '../../utils/errorTexts';
 
 function Movies({ savedMovies, buttonModifier = 'movies-card__like', onSearch, onButtonClick }) {
 
-    const [moviesToShow, setMoviesToShow] = useState(0);
     const [movies, setMovies] = useState([]);
     const [isPreloader, setPreloader] = useState(false);
     const [moviesMessage, setMoviesMessage] = useState('');
-
-    const moviesRef = useRef();
 
     useEffect(() => {
         setMovies(getResults());
     }, []);
 
-    useEffect(() => {
-        function getInitialNumber() {
-            if (window.innerWidth >= 1280) return 12;
-            if (window.innerWidth >= 768) return 8;
-            return 5;
-        }
-        if (movies.length === 0) return;
-        setMoviesToShow(Math.min(getInitialNumber(), movies.length));
-    }, [movies]);
 
     async function handleSubmit(searchText, isShortMeter) {
         setPreloader(true);
@@ -42,35 +30,18 @@ function Movies({ savedMovies, buttonModifier = 'movies-card__like', onSearch, o
         setPreloader(false);
     }
 
-    const getMoviesToAdd = (columnsString) => {
-        if (!columnsString) return;
-        const columnsCount = columnsString.split(' ').length;
-        return Math.max(columnsCount, 2);
-    }
-
-    function handleMore() {
-        if (moviesToShow === movies.length) return;
-        const moviesToAdd = getMoviesToAdd(getComputedStyle(moviesRef.current).getPropertyValue("grid-template-columns"));
-        setMoviesToShow(Math.min(moviesToShow + moviesToAdd, movies.length));
-    }
-
     return (<main className="movies">
         <SearchForm onSubmit={handleSubmit} />
         {isPreloader
             ? <Preloader />
             : moviesMessage
                 ? <span className="movies__message">{moviesMessage}</span>
-                : <>
-                    <MoviesCardList
-                        savedMovies={savedMovies}
-                        ref={moviesRef}
-                        movies={movies}
-                        buttonClassName={buttonModifier}
-                        moviesToShow={moviesToShow}
-                        onButtonClick={onButtonClick}
-                    />
-                    <More isVisible={movies.length > 0 && moviesToShow < movies.length} onClick={handleMore} />
-                </>
+                : <MoviesCardList
+                    savedMovies={savedMovies}
+                    movies={movies}
+                    buttonClassName={buttonModifier}
+                    onButtonClick={onButtonClick}
+                />
         }
     </main >);
 

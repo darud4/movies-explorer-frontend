@@ -169,7 +169,7 @@ function App() {
           </Route>
           <Route element={<ProtectedRoute isAllowed={currentUser.name} redirectPath="/" />}>
             <Route path='/movies' element={<><Header /><Movies savedMovies={savedMovies} onSearch={doSearch} onButtonClick={handleMoviesButton} /><Footer /></>} />
-            <Route path='/saved-movies' element={<><Header /><SavedMovies onButtonClick={removeFromSaved} /><Footer /></>} />
+            <Route path='/saved-movies' element={<><Header /><SavedMovies savedMovies={savedMovies} onButtonClick={removeFromSaved} /><Footer /></>} />
             <Route path='/profile' element={<><Header /><Profile onLogout={doLogout} onSubmit={handleProfileChange} /></>} />
           </Route>
 
