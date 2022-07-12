@@ -18,8 +18,9 @@ import { doLogin, doSignup, checkToken as validateToken } from '../../utils/auth
 import { searchMovies } from '../../utils/search';
 import { saveSearchString, saveResults, saveCheckbox } from '../../utils/storage';
 import { ERRORS } from '../../utils/errorTexts';
+import { CONFIG } from '../../config';
 
-
+const { imgUrl } = CONFIG;
 
 function App() {
 
@@ -108,10 +109,17 @@ function App() {
     } catch (error) { console.log(error); return { ok: false, error } }
   }
 
-  async function handleMoviesButton(movieData) {
-    console.log(movieData);
+  async function handleMoviesButton({
+    country, director, duration, year, description,
+    image, trailerLink, nameRU, nameEN, thumbnail, id: movieId,
+  }) {
     try {
-      const result = await mainApi.addMovieToSaved(movieData);
+      const imageUrl = `${imgUrl}${image.url}`;
+      const thumbUrl = `${imgUrl}${image.formats.thumbnail.url}`;
+      const result = await mainApi.addMovieToSaved({
+        country, director, duration, year, description,
+        image: imageUrl, trailerLink, nameRU, nameEN, thumbnail: thumbUrl, movieId,
+      });
       console.log(result);
     }
     catch (error) {

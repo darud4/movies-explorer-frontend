@@ -6,7 +6,9 @@ import MoviesCard from '../MoviesCard/MoviesCard';
 const MoviesCardList = forwardRef(({ moviesToShow, movies = [], buttonClassName, onButtonClick }, ref) => {
 
     function handleButtonClick(i) {
+        console.log(movies[i]);
         onButtonClick(movies[i]);
+
     }
 
     return (<ul className="movies-card-list" ref={ref}>
