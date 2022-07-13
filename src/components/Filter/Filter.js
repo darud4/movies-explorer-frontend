@@ -48,6 +48,7 @@ function Filter({ movies, buttonClassName, onButtonClick, showListOnMount = fals
                 saveCheckbox(isShortMeter);
                 saveSearchString(searchText);
                 saveResults(filtered);
+                saveMessage('');
             }
             if (!filtered.length) throw new Error(ERRORS.SEARCH__NO_RESULTS);
             setFilteredMovies(filtered);
