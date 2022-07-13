@@ -2,8 +2,6 @@ import './MoviesCardList.css';
 import { useEffect, useRef, useState } from 'react';
 import MoviesCard from '../MoviesCard/MoviesCard';
 import More from './More/More';
-import Preloader from './Preloader/Preloader';
-import { ERRORS } from '../../utils/errorTexts';
 
 function MoviesCardList({ movies, buttonClassName, onButtonClick }) {
 
@@ -20,12 +18,6 @@ function MoviesCardList({ movies, buttonClassName, onButtonClick }) {
         if (movies.length === 0) return;
         setMoviesToShow(Math.min(getInitialNumber(), movies.length));
     }, [movies]);
-
-
-    function handleButtonClick(i) {
-        //        console.log(movies[i]);
-        onButtonClick(movies[i]);
-    }
 
     const getMoviesToAdd = (columnsString) => {
         if (!columnsString) return;

@@ -1,22 +1,12 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef } from 'react';
 import './SearchForm.css';
 import FilterCheckbox from './FilterCheckbox/FilterCheckbox';
-import { getCheckbox, getSearchString } from '../../../utils/storage';
 
 function SearchForm({ onSubmit, isChecked, setChecked, searchString = '', onSearchChange }) {
-    //    const [isChecked, setChecked] = useState(false);
     const [isFocused, setFocused] = useState(false);
     const [error, setError] = useState('');
 
     const inputRef = useRef();
-
-    // useEffect(() => {
-    //     if (getFromLocalStorage) {
-    //         setChecked(getCheckbox());
-    //         inputRef.current.value = getSearchString();
-    //     }
-    // }, [getFromLocalStorage])
-
 
     const handleFocus = () => setFocused(true);
     const handleBlur = () => setFocused(false);

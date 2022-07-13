@@ -3,7 +3,6 @@ import { useState, useEffect } from 'react';
 import Filter from '../Filter/Filter';
 import { moviesApi } from '../../utils/MoviesApi';
 import { CONFIG } from '../../config';
-import { mainApi } from '../../utils/MainApi';
 
 const { imgUrl } = CONFIG;
 

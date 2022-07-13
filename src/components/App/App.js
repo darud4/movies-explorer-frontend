@@ -14,14 +14,7 @@ import Popup from '../Popup/Popup';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import { mainApi } from '../../utils/MainApi';
-import { moviesApi } from "../../utils/MoviesApi";
 import { doLogin, doSignup, checkToken as validateToken } from '../../utils/auth';
-import { searchMovies } from '../../utils/search';
-import { saveSearchString, saveResults, saveCheckbox } from '../../utils/storage';
-import { ERRORS } from '../../utils/errorTexts';
-import { CONFIG } from '../../config';
-
-const { imgUrl } = CONFIG;
 
 function App() {
 
@@ -71,7 +64,6 @@ function App() {
   async function handleLogin({ email, password }) {
     try {
       const { token } = await doLogin(email, password)
-      console.log(token);
       mainApi.setToken(token);
       const { name } = await mainApi.getUserInfo();
       setCurrentUser({ name, email });
@@ -100,21 +92,6 @@ function App() {
     }
   }
 
-  async function doMoviesSearch() {
-    try {
-      const movies = await moviesApi.search();
-      return { message: '', data: movies };
-      //      const filteredMovies = await searchMovies(searchText, isShortMeter);
-
-      //      saveResults(filteredMovies.data);
-      //      saveSearchString(searchText);
-      //      saveCheckbox(isShortMeter);
-      //      return filteredMovies;
-    } catch (error) {
-      return { message: ERRORS.MOVIES_API__GENERAL_ERROR, data: [] };
-    }
-  }
-
   function doLogout() {
     localStorage.clear();
     mainApi.setToken('');
@@ -125,7 +102,6 @@ function App() {
   async function handleProfileChange(userData) {
     try {
       const result = await mainApi.setUserInfo(userData);
-      //      console.log(result);
       if (!result._id) throw new Error('Ошибка при обновлении профиля');
       setCurrentUser(userData);
       return { ok: true };
@@ -144,7 +120,6 @@ function App() {
   }
 
   async function addToSaved({ country, director, duration, year, description, image, trailerLink, nameRU, nameEN, thumbnail, movieId }) {
-    //    console.log(props);
     try {
       const { movieId: theirId } = await mainApi.addMovieToSaved({
         country: country || 'не указано', director, duration, year, description,
@@ -181,7 +156,7 @@ function App() {
             <Route path='/signup' element={<Register onSubmit={handleRegister} />} />
           </Route>
           <Route element={<ProtectedRoute isAllowed={currentUser.name} redirectPath="/" />}>
-            <Route path='/movies' element={<><Header /><Movies getData={doMoviesSearch} onButtonClick={handleMoviesButton} savedMovies={savedMovies} /><Footer /></>} />
+            <Route path='/movies' element={<><Header /><Movies onButtonClick={handleMoviesButton} savedMovies={savedMovies} /><Footer /></>} />
             <Route path='/saved-movies' element={<><Header /><SavedMovies onButtonClick={handleSavedMoviesButton} savedMovies={savedMovies} /><Footer /></>} />
             <Route path='/profile' element={<><Header /><Profile onLogout={doLogout} onSubmit={handleProfileChange} /></>} />
           </Route>
