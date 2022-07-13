@@ -3,7 +3,7 @@ import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import SearchForm from './SearchForm/SearchForm';
 import Preloader from '../MoviesCardList/Preloader/Preloader';
 import { ERRORS } from '../../utils/errorTexts';
-import { getResults, getCheckbox, getSearchString, saveResults, saveCheckbox, saveSearchString } from '../../utils/storage';
+import { saveMessage, getMessage, getResults, getCheckbox, getSearchString, saveResults, saveCheckbox, saveSearchString } from '../../utils/storage';
 
 function Filter({ movies, buttonClassName, onButtonClick, showListOnMount = false, useLocalStorage = false, noMore }) {
 
@@ -25,6 +25,7 @@ function Filter({ movies, buttonClassName, onButtonClick, showListOnMount = fals
             setChecked(getCheckbox());
             setSearchString(getSearchString());
             setFilteredMovies(getResults());
+            setMoviesMessage(getMessage());
         }
     }, [useLocalStorage]);
 
@@ -39,22 +40,24 @@ function Filter({ movies, buttonClassName, onButtonClick, showListOnMount = fals
 
     function handleSearch(searchText, isShortMeter) {
         setPreloader(true);
-        if (useLocalStorage) {
-            saveCheckbox(isShortMeter);
-            saveSearchString(searchText);
-        }
         try {
             const filtered = movies.filter(movie =>
                 ((isShortMeter && movie.duration < 41) || !isShortMeter)
                 && movie.nameRU.toLowerCase().includes(searchText.toLowerCase()));
+            if (useLocalStorage) {
+                saveCheckbox(isShortMeter);
+                saveSearchString(searchText);
+                saveResults(filtered);
+            }
             if (!filtered.length) throw new Error(ERRORS.SEARCH__NO_RESULTS);
             setFilteredMovies(filtered);
-            saveResults(filtered);
             setMoviesMessage('');
         } catch (error) {
             setMoviesMessage(error.message || ERRORS.MOVIES_API__GENERAL_ERROR);
             setFilteredMovies([]);
-            console.log(error);
+            if (useLocalStorage) {
+                saveMessage(error.message || ERRORS.MOVIES_API__GENERAL_ERROR);
+            }
         }
         setPreloader(false);
     }
