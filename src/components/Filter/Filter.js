@@ -43,7 +43,6 @@ function Filter({ movies, buttonClassName, onButtonClick, showListOnMount = fals
             saveSearchString(searchText);
         }
         try {
-            //            console.log(movies);
             const filtered = movies.filter(movie =>
                 ((isShortMeter && movie.duration < 41) || !isShortMeter)
                 && movie.nameRU.toLowerCase().includes(searchText.toLowerCase()));
@@ -51,7 +50,6 @@ function Filter({ movies, buttonClassName, onButtonClick, showListOnMount = fals
             setFilteredMovies(filtered);
             saveResults(filtered);
             setMoviesMessage('');
-            //            setMovies(filteredMovies.data);
         } catch (error) {
             setMoviesMessage(error.message || ERRORS.MOVIES_API__GENERAL_ERROR);
             setFilteredMovies([]);

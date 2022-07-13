@@ -28,7 +28,6 @@ function App() {
 
   const getSavedMovies = useCallback(async () => {
     const result = await mainApi.getSavedMovies();
-    //    console.log(result);
     const processed = result.map(({ _id, country, director, duration, year, description,
       trailerLink, nameRU, nameEN, movieId, image, thumbnail }) =>
     ({
@@ -45,12 +44,9 @@ function App() {
     try {
       const { email, name } = await validateToken(token)
       if (!email) throw Error('Что-то пошло не так');
-      //      console.log(name, email, token, loginData);
-      //      setJwt(token);
       mainApi.setToken(token);
       setCurrentUser({ name, email });
       getSavedMovies();
-      //      setLoggedIn(true);
       navigate('/movies', { replace: true });
     }
     catch (error) { console.log(error) };
@@ -141,7 +137,6 @@ function App() {
   }
 
   function handleSavedMoviesButton({ id }) {
-    //    console.log(movieData);
     removeFromSaved(id);
   }
 

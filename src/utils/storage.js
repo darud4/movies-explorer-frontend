@@ -11,7 +11,6 @@ export function saveResults(movies) {
 };
 
 export function getResults() {
-//    console.log(localStorage.getItem('searchResults'))
     return JSON.parse(localStorage.getItem('searchResults') || '[]');
 };
 

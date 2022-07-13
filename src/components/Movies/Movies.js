@@ -9,11 +9,9 @@ const { imgUrl } = CONFIG;
 function Movies({ onButtonClick, savedMovies }) {
 
     const [movies, setMovies] = useState([]);
-    //    const [saved, setSaved] = useState([]);
 
     useEffect(() => {
         async function getMoviesList() {
-            //            const [moviesList, savedMoviesList] = await Promise.all([moviesApi.search(), mainApi.getSavedMovies()]);
             const moviesList = await moviesApi.search();
             const processed = moviesList.map(({ country, director, duration, year, description,
                 trailerLink, nameRU, nameEN, id: movieId, image: imageObj }) =>
@@ -22,15 +20,12 @@ function Movies({ onButtonClick, savedMovies }) {
                 thumbnail: `${imgUrl}${imageObj.formats.thumbnail.url}`
             }));
             setMovies(processed);
-            //            setSaved(savedMoviesList);
         }
         getMoviesList();
         console.log('movies list updated');
     }, []);
 
     function getStyle(movieId) {
-        //        console.log(movieId);
-        //        console.log(movieId);
         if (savedMovies.find(savedMovie => savedMovie.movieId === movieId)) return 'movies-card__like movies-card__like_active';
         return 'movies-card__like';
     }

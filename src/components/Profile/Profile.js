@@ -31,11 +31,8 @@ function Profile({ onLogout, onSubmit }) {
     async function handleSubmit(evt) {
         setErrorText('');
         const result = onSubmit && await onSubmit({ name, email });
-        //        console.log(result);
         if (result.ok) return;
-        //        console.log(result.error);
         setErrorText(decodeError(result.error));
-        //        debugger;
     }
 
     return (<form className="profile" name='profile'>
