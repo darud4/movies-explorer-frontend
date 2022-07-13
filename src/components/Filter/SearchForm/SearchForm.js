@@ -3,8 +3,8 @@ import './SearchForm.css';
 import FilterCheckbox from './FilterCheckbox/FilterCheckbox';
 import { getCheckbox, getSearchString } from '../../../utils/storage';
 
-function SearchForm({ onSubmit, getFromLocalStorage = true }) {
-    const [isChecked, setChecked] = useState(false);
+function SearchForm({ onSubmit, isChecked, setChecked, searchString = '', onSearchChange }) {
+    //    const [isChecked, setChecked] = useState(false);
     const [isFocused, setFocused] = useState(false);
     const [error, setError] = useState('');
 
@@ -17,9 +17,6 @@ function SearchForm({ onSubmit, getFromLocalStorage = true }) {
     //     }
     // }, [getFromLocalStorage])
 
-    function handleChange({ target: { checked: newState } }) {
-        setChecked(newState);
-    }
 
     const handleFocus = () => setFocused(true);
     const handleBlur = () => setFocused(false);
@@ -31,16 +28,19 @@ function SearchForm({ onSubmit, getFromLocalStorage = true }) {
         onSubmit && onSubmit(inputRef.current.value, isChecked);
     }
 
-    function handleInput() { setError(''); }
+    function handleInput({ target: { value } }) {
+        setError('');
+        onSearchChange(value);
+    }
 
     return <form className="search-form" noValidate onSubmit={handleSubmit}>
         <div className="search-form__container">
             <label className={`search-form__search-string ${isFocused ? 'search-form__search-string_active' : ''}`}>
-                <input type="text" ref={inputRef} onFocus={handleFocus} onBlur={handleBlur} onChange={handleInput} className="search-form__input" placeholder="Фильм" required />
+                <input type="text" ref={inputRef} onFocus={handleFocus} onBlur={handleBlur} value={searchString} onChange={handleInput} className="search-form__input" placeholder="Фильм" required />
                 <button className="search-form__submit">Найти</button>
             </label>
             <span className="search-form__error">{error}</span>
-            <FilterCheckbox checked={isChecked} caption="Короткометражки" onChange={handleChange} />
+            <FilterCheckbox checked={isChecked} caption="Короткометражки" onChange={setChecked} />
         </div>
     </form>
 }

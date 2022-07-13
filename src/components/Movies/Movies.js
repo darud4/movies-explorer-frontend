@@ -38,6 +38,7 @@ function Movies({ onButtonClick, savedMovies }) {
 
     return (<main className="movies">
         <Filter
+            useLocalStorage={true}
             buttonClassName={getStyle}
             onButtonClick={onButtonClick}
             movies={movies}
