@@ -10,7 +10,7 @@ function Profile({ onLogout, onSubmit }) {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [isSubmitDisabled, setSubmitDisabled] = useState(true);
-    const [errorText, setErrorText] = useState('');
+    const [message, setMessage] = useState({ text: '', className: '' });
 
     const currentUser = useContext(CurrentUserContext);
 
@@ -27,12 +27,18 @@ function Profile({ onLogout, onSubmit }) {
 
     const handleNameChange = (newVal) => setName(newVal);
     const handleEmailChange = (newVal) => setEmail(newVal);
+    const clearMessage = () => setMessage({ text: '', className: '' });
 
-    async function handleSubmit(evt) {
-        setErrorText('');
+    function showMessage({ text, className }) {
+        setMessage({ text, className });
+        setTimeout(() => { clearMessage() }, 4000);
+    }
+
+    async function handleSubmit() {
+        clearMessage();
         const result = onSubmit && await onSubmit({ name, email });
-        if (result.ok) return;
-        setErrorText(decodeError(result.error));
+        if (result.ok) showMessage({ text: 'Данные успешно обновлены', className: 'profile__message_success' })
+        showMessage({ text: decodeError(result.error), className: 'profile__message' });
     }
 
     return (<form className="profile" name='profile'>
@@ -42,7 +48,7 @@ function Profile({ onLogout, onSubmit }) {
             <ProfileInput caption="E-mail" name='email' placeholder='Введите адрес электронной почты' value={email} onChange={handleEmailChange} />
         </fieldset>
         <fieldset className="profile__buttons">
-            <span className="profile__error">{errorText}</span>
+            <span className={message.className || ''}>{message.text || ''}</span>
             <button
                 type="button"
                 className={`profile__button ${isSubmitDisabled ? 'profile__button_disabled' : ''}`}
