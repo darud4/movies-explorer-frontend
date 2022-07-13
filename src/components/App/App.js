@@ -115,7 +115,6 @@ function App() {
     }
   }
 
-
   function doLogout() {
     localStorage.clear();
     mainApi.setToken('');
@@ -149,7 +148,7 @@ function App() {
     try {
       const { movieId: theirId } = await mainApi.addMovieToSaved({
         country: country || 'не указано', director, duration, year, description,
-        image, trailerLink, nameRU, nameEN, thumbnail, movieId,
+        image, trailerLink: trailerLink || 'https://null.ru', nameRU, nameEN: nameEN || 'не указано', thumbnail, movieId,
       });
       if (!theirId) throw new Error('Ошибка при добавлении в сохраненные фильмы');
       getSavedMovies();
