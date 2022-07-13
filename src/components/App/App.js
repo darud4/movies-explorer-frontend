@@ -100,7 +100,7 @@ function App() {
       if (!result._id) throw new Error('Ошибка при обновлении профиля');
       setCurrentUser(userData);
       return { ok: true };
-    } catch (error) { console.log(error); return { ok: false, error } }
+    } catch (error) { console.log('Ошибка при обновлении профиля', error); return { ok: false, error } }
   }
 
   async function removeFromSaved(ourId) {
