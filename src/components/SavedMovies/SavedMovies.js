@@ -9,6 +9,7 @@ function SavedMovies({ onButtonClick, savedMovies }) {
             onButtonClick={onButtonClick}
             movies={savedMovies}
             showListOnMount={true}
+            noMore={true}
         />
     </main>
 }

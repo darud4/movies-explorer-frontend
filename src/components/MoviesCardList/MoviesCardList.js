@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from 'react';
 import MoviesCard from '../MoviesCard/MoviesCard';
 import More from './More/More';
 
-function MoviesCardList({ movies, buttonClassName, onButtonClick }) {
+function MoviesCardList({ movies, buttonClassName, onButtonClick, noMore = false }) {
 
     const [moviesToShow, setMoviesToShow] = useState(0);
 
@@ -16,8 +16,9 @@ function MoviesCardList({ movies, buttonClassName, onButtonClick }) {
             return 5;
         }
         if (movies.length === 0) return;
-        setMoviesToShow(Math.min(getInitialNumber(), movies.length));
-    }, [movies]);
+        if (noMore) setMoviesToShow(movies.length);
+        else setMoviesToShow(Math.min(getInitialNumber(), movies.length));
+    }, [movies, noMore]);
 
     const getMoviesToAdd = (columnsString) => {
         if (!columnsString) return;

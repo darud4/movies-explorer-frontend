@@ -5,7 +5,7 @@ import Preloader from '../MoviesCardList/Preloader/Preloader';
 import { ERRORS } from '../../utils/errorTexts';
 import { getResults, getCheckbox, getSearchString, saveResults, saveCheckbox, saveSearchString } from '../../utils/storage';
 
-function Filter({ movies, buttonClassName, onButtonClick, showListOnMount = false, useLocalStorage = false }) {
+function Filter({ movies, buttonClassName, onButtonClick, showListOnMount = false, useLocalStorage = false, noMore }) {
 
     const [filteredMovies, setFilteredMovies] = useState([]);
     const [moviesMessage, setMoviesMessage] = useState('');
@@ -68,6 +68,7 @@ function Filter({ movies, buttonClassName, onButtonClick, showListOnMount = fals
                     buttonClassName={buttonClassName}
                     onButtonClick={onButtonClick}
                     movies={filteredMovies}
+                    noMore={noMore}
                 />
         }
     </>);
