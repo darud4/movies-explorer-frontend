@@ -39,16 +39,20 @@ function MoviesCardList({ movies, buttonClassName, onButtonClick }) {
         setMoviesToShow(Math.min(moviesToShow + moviesToAdd, movies.length));
     }
 
+    function getClass(id) {
+        return typeof buttonClassName === 'function' ? buttonClassName(id) : buttonClassName;
+    }
+
     return (
         <>
             <ul className="movies-card-list" ref={ref}>
-                {movies.map(({ image, nameRU, duration, trailerLink, id }, i) =>
+                {movies.map(({ image, nameRU, duration, trailerLink, movieId }, i) =>
                 (i < moviesToShow && <MoviesCard
-                    key={id}
+                    key={movieId}
                     image={image}
                     name={nameRU}
                     duration={duration}
-                    buttonClassName={buttonClassName}
+                    buttonClassName={getClass(movieId)}
                     link={trailerLink}
                     onButtonClick={() => handleButtonClick(i)}
                 />))

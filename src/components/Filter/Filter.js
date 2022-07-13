@@ -4,7 +4,7 @@ import SearchForm from './SearchForm/SearchForm';
 import Preloader from '../MoviesCardList/Preloader/Preloader';
 import { ERRORS } from '../../utils/errorTexts';
 
-function Filter({ movies, buttonModifier, onButtonClick, showListOnMount = false }) {
+function Filter({ movies, buttonClassName, onButtonClick, showListOnMount = false }) {
 
     const [filteredMovies, setFilteredMovies] = useState([]);
     const [moviesMessage, setMoviesMessage] = useState('');
@@ -42,7 +42,7 @@ function Filter({ movies, buttonModifier, onButtonClick, showListOnMount = false
             : moviesMessage
                 ? <span className="movies__message">{moviesMessage}</span>
                 : <MoviesCardList
-                    buttonClassName={buttonModifier}
+                    buttonClassName={buttonClassName}
                     onButtonClick={onButtonClick}
                     movies={filteredMovies}
                 />
