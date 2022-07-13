@@ -36,7 +36,15 @@ function App() {
   const getSavedMovies = useCallback(async () => {
     const result = await mainApi.getSavedMovies();
     //    console.log(result);
-    setSavedMovies(result);
+    const processed = result.map(({ _id, country, director, duration, year, description,
+      trailerLink, nameRU, nameEN, movieId, image, thumbnail }) =>
+    ({
+      id: _id, country, director, duration, year, description,
+      trailerLink, nameRU, nameEN, movieId, image, thumbnail
+    })
+    );
+    setSavedMovies(processed);
+
   }, []);
 
   const checkToken = useCallback(async (token) => {
@@ -130,22 +138,18 @@ function App() {
       const { movieId } = await mainApi.removeMovieFromSaved(ourId);
       if (!movieId) throw new Error('Ошибка при удалении из сохраненных фильмов');
       getSavedMovies();
-
     }
     catch (error) {
       console.log('remove from saved', error);
     }
-
   }
 
-  async function addToSaved({ country, director, duration, year, description,
-    image, trailerLink, nameRU, nameEN, id: movieId }) {
+  async function addToSaved({ country, director, duration, year, description, image, trailerLink, nameRU, nameEN, thumbnail, movieId }) {
+    //    console.log(props);
     try {
-      const imageUrl = `${imgUrl}${image.url}`;
-      const thumbUrl = `${imgUrl}${image.formats.thumbnail.url}`;
       const { movieId: theirId } = await mainApi.addMovieToSaved({
         country: country || 'не указано', director, duration, year, description,
-        image: imageUrl, trailerLink, nameRU, nameEN, thumbnail: thumbUrl, movieId,
+        image, trailerLink, nameRU, nameEN, thumbnail, movieId,
       });
       if (!theirId) throw new Error('Ошибка при добавлении в сохраненные фильмы');
       getSavedMovies();
@@ -156,13 +160,15 @@ function App() {
   }
 
   function handleMoviesButton(movieData) {
+    console.log(movieData);
     const savedMovie = savedMovies.find(({ movieId }) => movieId === movieData.id);
-    if (savedMovie) removeFromSaved(savedMovie._id);
+    if (savedMovie) removeFromSaved(savedMovie.id);
     else addToSaved(movieData);
   }
 
-  function handleSavedMoviesButton(movieData) {
-    removeFromSaved(movieData._id);
+  function handleSavedMoviesButton({ id }) {
+    //    console.log(movieData);
+    removeFromSaved(id);
   }
 
   return (
@@ -176,8 +182,8 @@ function App() {
             <Route path='/signup' element={<Register onSubmit={handleRegister} />} />
           </Route>
           <Route element={<ProtectedRoute isAllowed={currentUser.name} redirectPath="/" />}>
-            <Route path='/movies' element={<><Header /><Movies getData={doMoviesSearch} onButtonClick={handleMoviesButton} /><Footer /></>} />
-            <Route path='/saved-movies' element={<><Header /><SavedMovies onButtonClick={handleSavedMoviesButton} /><Footer /></>} />
+            <Route path='/movies' element={<><Header /><Movies getData={doMoviesSearch} onButtonClick={handleMoviesButton} savedMovies={savedMovies} /><Footer /></>} />
+            <Route path='/saved-movies' element={<><Header /><SavedMovies onButtonClick={handleSavedMoviesButton} savedMovies={savedMovies} /><Footer /></>} />
             <Route path='/profile' element={<><Header /><Profile onLogout={doLogout} onSubmit={handleProfileChange} /></>} />
           </Route>
 

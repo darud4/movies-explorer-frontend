@@ -24,7 +24,7 @@ function MoviesCardList({ movies, buttonClassName, onButtonClick }) {
 
     function handleButtonClick(i) {
         //        console.log(movies[i]);
-        onButtonClick(i);
+        onButtonClick(movies[i]);
     }
 
     const getMoviesToAdd = (columnsString) => {
@@ -46,15 +46,15 @@ function MoviesCardList({ movies, buttonClassName, onButtonClick }) {
     return (
         <>
             <ul className="movies-card-list" ref={ref}>
-                {movies.map(({ image, nameRU, duration, trailerLink, movieId }, i) =>
+                {movies.map(({ image, nameRU, duration, trailerLink, movieId, id }, i) =>
                 (i < moviesToShow && <MoviesCard
-                    key={movieId}
+                    key={id}
                     image={image}
                     name={nameRU}
                     duration={duration}
                     buttonClassName={getClass(movieId)}
                     link={trailerLink}
-                    onButtonClick={() => handleButtonClick(i)}
+                    onButtonClick={() => onButtonClick(movies[i])}
                 />))
                 }
             </ul>
