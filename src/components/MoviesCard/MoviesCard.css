@@ -64,6 +64,7 @@
   background-position: center;
   transition: background-color 0.3s ease;
   border: 0;
+  cursor: pointer;
 }
 
 .movies-card__like:hover {
