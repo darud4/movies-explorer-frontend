@@ -40,7 +40,6 @@ function App() {
   }, []);
 
   const checkToken = useCallback(async (token) => {
-    console.log('checkToken fired');
     try {
       const { email, name } = await validateToken(token)
       if (!email) throw Error('Что-то пошло не так');
@@ -130,7 +129,6 @@ function App() {
   }
 
   function handleMoviesButton(movieData) {
-    console.log(movieData);
     const savedMovie = savedMovies.find(({ movieId }) => movieId === movieData.id);
     if (savedMovie) removeFromSaved(savedMovie.id);
     else addToSaved(movieData);

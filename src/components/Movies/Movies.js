@@ -22,7 +22,6 @@ function Movies({ onButtonClick, savedMovies }) {
             setMovies(processed);
         }
         getMoviesList();
-        console.log('movies list updated');
     }, []);
 
     function getStyle(movieId) {

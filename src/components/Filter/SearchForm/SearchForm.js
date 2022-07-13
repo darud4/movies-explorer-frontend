@@ -2,7 +2,7 @@ import { useState, useRef } from 'react';
 import './SearchForm.css';
 import FilterCheckbox from './FilterCheckbox/FilterCheckbox';
 
-function SearchForm({ onSubmit, isChecked, setChecked, searchString = '', onSearchChange }) {
+function SearchForm({ onSubmit, isChecked, setChecked, searchString, onSearchChange }) {
     const [isFocused, setFocused] = useState(false);
     const [error, setError] = useState('');
 
@@ -26,7 +26,7 @@ function SearchForm({ onSubmit, isChecked, setChecked, searchString = '', onSear
     return <form className="search-form" noValidate onSubmit={handleSubmit}>
         <div className="search-form__container">
             <label className={`search-form__search-string ${isFocused ? 'search-form__search-string_active' : ''}`}>
-                <input type="text" ref={inputRef} onFocus={handleFocus} onBlur={handleBlur} value={searchString} onChange={handleInput} className="search-form__input" placeholder="Фильм" required />
+                <input type="text" ref={inputRef} onFocus={handleFocus} onBlur={handleBlur} value={searchString || ''} onChange={handleInput} className="search-form__input" placeholder="Фильм" required />
                 <button className="search-form__submit">Найти</button>
             </label>
             <span className="search-form__error">{error}</span>
