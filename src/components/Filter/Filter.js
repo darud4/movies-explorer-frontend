@@ -30,6 +30,7 @@ function Filter({ movies, buttonClassName, onButtonClick, showListOnMount = fals
 
     function handleCheckboxChange({ target: { checked: newState } }) {
         setChecked(newState);
+        handleSearch(searchString, newState);
     }
 
     function handleSearchChange(newVal) {

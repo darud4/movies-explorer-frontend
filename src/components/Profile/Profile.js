@@ -31,14 +31,14 @@ function Profile({ onLogout, onSubmit }) {
 
     function showMessage({ text, className }) {
         setMessage({ text, className });
-        setTimeout(() => { clearMessage() }, 4000);
+        setTimeout(() => clearMessage(), 4000);
     }
 
     async function handleSubmit() {
         clearMessage();
         const result = onSubmit && await onSubmit({ name, email });
         if (result.ok) showMessage({ text: 'Данные успешно обновлены', className: 'profile__message_success' })
-        showMessage({ text: decodeError(result.error), className: 'profile__message' });
+        else showMessage({ text: decodeError(result.error), className: 'profile__message' });
     }
 
     return (<form className="profile" name='profile'>

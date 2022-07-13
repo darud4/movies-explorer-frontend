@@ -2,7 +2,7 @@ const errors = {
     401: 'Ошибка авторизации в удаленном ресурсе',
 };
 
-export function decodeError(error) {
+export function decodeError(error = {}) {
     return errors[error.errorCode] || 'Произошла ошибка';
 }
 
