@@ -1,10 +1,11 @@
 import './MoviesCardList.css';
 import { useEffect, useRef, useState } from 'react';
 import MoviesCard from '../MoviesCard/MoviesCard';
-import More from '../Movies/More/More';
+import More from './More/More';
+import Preloader from './Preloader/Preloader';
+import { ERRORS } from '../../utils/errorTexts';
 
-
-function MoviesCardList({ savedMovies = [], movies = [], buttonClassName, onButtonClick }) {
+function MoviesCardList({ movies, buttonClassName, onButtonClick }) {
 
     const [moviesToShow, setMoviesToShow] = useState(0);
 
@@ -20,9 +21,10 @@ function MoviesCardList({ savedMovies = [], movies = [], buttonClassName, onButt
         setMoviesToShow(Math.min(getInitialNumber(), movies.length));
     }, [movies]);
 
+
     function handleButtonClick(i) {
         //        console.log(movies[i]);
-        onButtonClick(movies[i]);
+        onButtonClick(i);
     }
 
     const getMoviesToAdd = (columnsString) => {
@@ -40,18 +42,19 @@ function MoviesCardList({ savedMovies = [], movies = [], buttonClassName, onButt
     return (
         <>
             <ul className="movies-card-list" ref={ref}>
-                {movies.map(({ image, nameRU: name, duration, trailerLink, id }, i) =>
+                {movies.map(({ image, nameRU, duration, trailerLink, id }, i) =>
                 (i < moviesToShow && <MoviesCard
                     key={id}
-                    image={image.url}
-                    name={name}
+                    image={image}
+                    name={nameRU}
                     duration={duration}
-                    buttonClassName={savedMovies.find(({ movieId }) => movieId === id) ? `${buttonClassName} ${buttonClassName}_active` : `${buttonClassName}`}
+                    buttonClassName={buttonClassName}
                     link={trailerLink}
                     onButtonClick={() => handleButtonClick(i)}
                 />))
                 }
-            </ul><More isVisible={movies.length > 0 && moviesToShow < movies.length} onClick={handleMore} />
+            </ul>
+            <More isVisible={movies.length > 0 && moviesToShow < movies.length} onClick={handleMore} />
         </>);
 };
 

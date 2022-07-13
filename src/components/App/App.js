@@ -14,6 +14,7 @@ import Popup from '../Popup/Popup';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import { mainApi } from '../../utils/MainApi';
+import { moviesApi } from "../../utils/MoviesApi";
 import { doLogin, doSignup, checkToken as validateToken } from '../../utils/auth';
 import { searchMovies } from '../../utils/search';
 import { saveSearchString, saveResults, saveCheckbox } from '../../utils/storage';
@@ -91,17 +92,21 @@ function App() {
     }
   }
 
-  async function doSearch(searchText, isShortMeter) {
+  async function doMoviesSearch() {
     try {
-      const filteredMovies = await searchMovies(searchText, isShortMeter);
-      saveResults(filteredMovies.data);
-      saveSearchString(searchText);
-      saveCheckbox(isShortMeter);
-      return filteredMovies;
+      const movies = await moviesApi.search();
+      return { message: '', data: movies };
+      //      const filteredMovies = await searchMovies(searchText, isShortMeter);
+
+      //      saveResults(filteredMovies.data);
+      //      saveSearchString(searchText);
+      //      saveCheckbox(isShortMeter);
+      //      return filteredMovies;
     } catch (error) {
-      return { message: ERRORS.MOVIES_API_GENERAL_ERROR, data: [] };
+      return { message: ERRORS.MOVIES_API__GENERAL_ERROR, data: [] };
     }
   }
+
 
   function doLogout() {
     localStorage.clear();
@@ -171,8 +176,8 @@ function App() {
             <Route path='/signup' element={<Register onSubmit={handleRegister} />} />
           </Route>
           <Route element={<ProtectedRoute isAllowed={currentUser.name} redirectPath="/" />}>
-            <Route path='/movies' element={<><Header /><Movies savedMovies={savedMovies} onSearch={doSearch} onButtonClick={handleMoviesButton} /><Footer /></>} />
-            <Route path='/saved-movies' element={<><Header /><SavedMovies savedMovies={savedMovies} onButtonClick={handleSavedMoviesButton} /><Footer /></>} />
+            <Route path='/movies' element={<><Header /><Movies getData={doMoviesSearch} onButtonClick={handleMoviesButton} /><Footer /></>} />
+            <Route path='/saved-movies' element={<><Header /><SavedMovies onButtonClick={handleSavedMoviesButton} /><Footer /></>} />
             <Route path='/profile' element={<><Header /><Profile onLogout={doLogout} onSubmit={handleProfileChange} /></>} />
           </Route>
 

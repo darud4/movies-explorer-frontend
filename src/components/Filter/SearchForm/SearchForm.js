@@ -3,17 +3,19 @@ import './SearchForm.css';
 import FilterCheckbox from './FilterCheckbox/FilterCheckbox';
 import { getCheckbox, getSearchString } from '../../../utils/storage';
 
-function SearchForm({ onSubmit }) {
+function SearchForm({ onSubmit, getFromLocalStorage = true }) {
     const [isChecked, setChecked] = useState(false);
     const [isFocused, setFocused] = useState(false);
     const [error, setError] = useState('');
 
     const inputRef = useRef();
 
-    useEffect(() => {
-        setChecked(getCheckbox());
-        inputRef.current.value = getSearchString();
-    }, [])
+    // useEffect(() => {
+    //     if (getFromLocalStorage) {
+    //         setChecked(getCheckbox());
+    //         inputRef.current.value = getSearchString();
+    //     }
+    // }, [getFromLocalStorage])
 
     function handleChange({ target: { checked: newState } }) {
         setChecked(newState);
@@ -26,7 +28,6 @@ function SearchForm({ onSubmit }) {
         evt.preventDefault();
         if (!evt.target.checkValidity()) { setError('Нужно ввести ключевое слово'); return; }
         setError('');
-        //        console.log(inputRef.current.value, isChecked);
         onSubmit && onSubmit(inputRef.current.value, isChecked);
     }
 

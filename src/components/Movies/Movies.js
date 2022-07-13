@@ -1,47 +1,38 @@
 import './Movies.css'
 import { useState, useEffect } from 'react';
-import SearchForm from './SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
-import Preloader from './Preloader/Preloader';
+import Filter from '../Filter/Filter';
+import { mainApi } from '../../utils/MainApi';
 import { getResults } from '../../utils/storage';
-import { ERRORS } from '../../utils/errorTexts';
+import { CONFIG } from '../../config';
+import { moviesApi } from '../../utils/MoviesApi';
 
-function Movies({ savedMovies, buttonModifier = 'movies-card__like', onSearch, onButtonClick }) {
+const { imgUrl } = CONFIG;
+
+
+function Movies({ onButtonClick }) {
 
     const [movies, setMovies] = useState([]);
-    const [isPreloader, setPreloader] = useState(false);
-    const [moviesMessage, setMoviesMessage] = useState('');
 
     useEffect(() => {
-        setMovies(getResults());
+
+        async function getMoviesList() {
+            const data = await moviesApi.search();
+            console.log(data);
+            const processed = data.map(({ country, director, duration, year, description, trailerLink, nameRU, nameEN, id: movieId, image: imageObj }) =>
+                ({ id: movieId, country, director, duration, year, description, trailerLink, nameRU, nameEN, movieId, image: `${imgUrl}${imageObj.url}`, thumbnail: `${imgUrl}${imageObj.formats.thumbnail.url}` })
+            );
+            console.log(processed);
+            setMovies(processed);
+        }
+        getMoviesList();
     }, []);
 
-
-    async function handleSubmit(searchText, isShortMeter) {
-        setPreloader(true);
-        try {
-            const filteredMovies = await onSearch(searchText, isShortMeter);
-            setMoviesMessage(filteredMovies.message)
-            setMovies(filteredMovies.data);
-        } catch (error) {
-            setMoviesMessage(ERRORS.MOVIES_API_GENERAL_ERROR);
-        }
-        setPreloader(false);
-    }
-
     return (<main className="movies">
-        <SearchForm onSubmit={handleSubmit} />
-        {isPreloader
-            ? <Preloader />
-            : moviesMessage
-                ? <span className="movies__message">{moviesMessage}</span>
-                : <MoviesCardList
-                    savedMovies={savedMovies}
-                    movies={movies}
-                    buttonClassName={buttonModifier}
-                    onButtonClick={onButtonClick}
-                />
-        }
+        <Filter buttonClassName='movies-card__like'
+            onButtonClick={onButtonClick}
+            movies={movies}
+        />
     </main >);
 
 }
