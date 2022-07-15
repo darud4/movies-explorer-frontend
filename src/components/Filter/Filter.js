@@ -46,8 +46,8 @@ function Filter({ movies, buttonClassName, onButtonClick, showListOnMount = fals
 
     async function handleSearch(searchText, isShortMeter) {
         setPreloader(true);
-        await pause();
         try {
+            await pause();
             const filtered = movies.filter(movie =>
                 ((isShortMeter && movie.duration < 41) || !isShortMeter)
                 && movie.nameRU.toLowerCase().includes(searchText.toLowerCase()));

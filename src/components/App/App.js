@@ -42,7 +42,7 @@ function App() {
       mainApi.setToken(token);
       setCurrentUser({ name, email });
       getSavedMovies();
-      navigate('/movies', { replace: true });
+//      navigate('/movies', { replace: true });
     }
     catch (error) { console.log(error) };
   }, [getSavedMovies]);
