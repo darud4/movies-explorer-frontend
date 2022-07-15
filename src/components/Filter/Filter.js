@@ -38,8 +38,15 @@ function Filter({ movies, buttonClassName, onButtonClick, showListOnMount = fals
         setSearchString(newVal);
     }
 
-    function handleSearch(searchText, isShortMeter) {
+    function pause() {
+        return new Promise((res, rej) => {
+            setTimeout(res, 300);
+        });
+    }
+
+    async function handleSearch(searchText, isShortMeter) {
         setPreloader(true);
+        await pause();
         try {
             const filtered = movies.filter(movie =>
                 ((isShortMeter && movie.duration < 41) || !isShortMeter)
