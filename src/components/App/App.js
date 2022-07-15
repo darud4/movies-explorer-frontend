@@ -34,7 +34,6 @@ function App() {
     })
     );
     setSavedMovies(processed);
-
   }, []);
 
   const checkToken = useCallback(async (token) => {

@@ -1,7 +1,7 @@
 import './ProfileInput.css';
 import { useState } from 'react';
 
-function ProfileInput({ caption, name, placeholder, value, onChange }) {
+function ProfileInput({ caption, name, placeholder, value, onChange, isDisabled = false }) {
 
     const [isActive, setActive] = useState(false);
 
@@ -16,7 +16,9 @@ function ProfileInput({ caption, name, placeholder, value, onChange }) {
             name={name}
             className="profile-input__input"
             value={value}
-            onChange={({ target }) => onChange(target.value)} />
+            onChange={({ target }) => onChange(target.value)}
+            disabled={isDisabled}
+        />
     </label>);
 
 }

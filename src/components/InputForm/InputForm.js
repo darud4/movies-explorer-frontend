@@ -12,10 +12,12 @@ function InputForm({ inputs, onSubmit, title, formName, buttonName, bottomText, 
 
     const { values, errors, isValid, handleChange, resetForm } = useFormWithValidation();
     const [errorText, setErrorText] = useState('');
+    const [isDisabled, setDisabled] = useState(false);
     useEffect(() => resetForm(), [resetForm]);
 
     async function handleSubmit(evt) {
         evt.preventDefault();
+        setDisabled(true);
         setErrorText('');
         try {
             const result = onSubmit && await onSubmit(values);
@@ -24,6 +26,7 @@ function InputForm({ inputs, onSubmit, title, formName, buttonName, bottomText, 
             console.log(error);
             setErrorText(error.message || 'Неизвестная ошибка');
         }
+        setDisabled(false);
     }
 
     return (<form noValidate className="input-form" name={formName} onSubmit={handleSubmit}>
@@ -41,11 +44,12 @@ function InputForm({ inputs, onSubmit, title, formName, buttonName, bottomText, 
                     error={errors[name]}
                     validate={validate}
                     validationMessage={validationMessage}
+                    isDisabled={isDisabled}
                 />)}
             <span className="input-form__error">{errorText}</span>
         </fieldset>
         <fieldset className="input-form__buttons">
-            <Button caption={buttonName} isValid={isValid} />
+            <Button caption={buttonName} isValid={isValid && !isDisabled} />
             <span className="input-form__text">{bottomText}<Link to={linkTarget} className="input-form__link">{bottomLink}</Link></span>
         </fieldset>
     </form>);

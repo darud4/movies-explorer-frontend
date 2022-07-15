@@ -5,7 +5,7 @@ import Preloader from '../MoviesCardList/Preloader/Preloader';
 import { ERRORS } from '../../utils/errorTexts';
 import { saveMessage, getMessage, getResults, getCheckbox, getSearchString, saveResults, saveCheckbox, saveSearchString } from '../../utils/storage';
 
-function Filter({ movies, buttonClassName, onButtonClick, showListOnMount = false, useLocalStorage = false, noMore }) {
+function Filter({ movies, buttonClassName, onButtonClick, showListOnMount = false, useLocalStorage = false, noMore, isBusy = false }) {
 
     const [filteredMovies, setFilteredMovies] = useState([]);
     const [moviesMessage, setMoviesMessage] = useState('');
@@ -40,7 +40,7 @@ function Filter({ movies, buttonClassName, onButtonClick, showListOnMount = fals
 
     function pause() {
         return new Promise((res, rej) => {
-            setTimeout(res, 300);
+            setTimeout(res, 200);
         });
     }
 
@@ -70,20 +70,28 @@ function Filter({ movies, buttonClassName, onButtonClick, showListOnMount = fals
         setPreloader(false);
     }
 
-    return (<>
-        <SearchForm onSubmit={handleSearch} isChecked={isChecked} searchString={searchString} setChecked={handleCheckboxChange} onSearchChange={handleSearchChange} />
-        {isPreloader
-            ? <Preloader />
-            : moviesMessage
-                ? <span className="movies__message">{moviesMessage}</span>
-                : <MoviesCardList
-                    buttonClassName={buttonClassName}
-                    onButtonClick={onButtonClick}
-                    movies={filteredMovies}
-                    noMore={noMore}
-                />
-        }
-    </>);
+    return (
+        <>
+            <SearchForm
+                isDisabled={isBusy || isPreloader}
+                onSubmit={handleSearch}
+                isChecked={isChecked}
+                searchString={searchString}
+                setChecked={handleCheckboxChange}
+                onSearchChange={handleSearchChange}
+            />
+            {isPreloader || isBusy
+                ? <Preloader />
+                : moviesMessage
+                    ? <span className="movies__message">{moviesMessage}</span>
+                    : <MoviesCardList
+                        buttonClassName={buttonClassName}
+                        onButtonClick={onButtonClick}
+                        movies={filteredMovies}
+                        noMore={noMore}
+                    />
+            }
+        </>);
 }
 
 export default Filter;
