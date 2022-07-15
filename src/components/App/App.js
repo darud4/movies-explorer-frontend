@@ -45,7 +45,6 @@ function App() {
       getSavedMovies();
       setOriginalRoute(location.pathname);
       return true;
-      //      navigate('/movies', { replace: true });
     }
     catch (error) { console.log(error); return false; };
   }, [getSavedMovies]);
