@@ -143,8 +143,8 @@ function App() {
       <div className="page">
         <Popup titleText="Какая-то ошибка" popupText="Текст какой-то ошбики" submitText="ОК" onClose={closeErrorPopup} isOpen={isErrorPopup} />
         <Routes>
+          <Route path='/' element={<><Header theme="dark" /><Main /><Footer /></>} />
           <Route element={<ProtectedRoute isAllowed={!currentUser.name} redirectPath="/movies" />}>
-            <Route path='/' element={<><Header isLogged={false} /><Main /><Footer /></>} />
             <Route path='/signin' element={<Login onSubmit={handleLogin} />} />
             <Route path='/signup' element={<Register onSubmit={handleRegister} />} />
           </Route>
@@ -153,7 +153,6 @@ function App() {
             <Route path='/saved-movies' element={<><Header /><SavedMovies onButtonClick={handleSavedMoviesButton} savedMovies={savedMovies} /><Footer /></>} />
             <Route path='/profile' element={<><Header /><Profile onLogout={doLogout} onSubmit={handleProfileChange} /></>} />
           </Route>
-
           <Route path="*" element={<Page404 />} />
         </Routes>
       </div>

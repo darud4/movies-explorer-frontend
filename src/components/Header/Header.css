@@ -3,14 +3,17 @@
   justify-content: space-between;
   align-items: center;
   padding: 18px 70px;
-  background-color: #5c5c5c;
-  color: white;
+  background-color: white;
+  color: black;
 }
 
 .header_logged {
-  background-color: white;
-  color: black;
   gap: 44px;
+}
+
+.header_theme_dark {
+  background-color: #5c5c5c;
+  color: white;
 }
 
 @media screen and (max-width: 768px) {
