@@ -2,7 +2,7 @@ import './Page404.css';
 import { useNavigate } from 'react-router-dom';
 
 function Page404({ link }) {
-
+    
     const navigate = useNavigate();
 
     return <section className='page404'>

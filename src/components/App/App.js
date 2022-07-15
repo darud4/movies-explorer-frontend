@@ -56,7 +56,10 @@ function App() {
     if (jwt) checkToken(jwt);
   }, [checkToken]);
 
-  useEffect(() => { if (currentUser.name && originalRoute) navigate(originalRoute); setOriginalRoute(''); }, [currentUser]);
+  useEffect(() => {
+    if (currentUser.name && originalRoute)
+      navigate(originalRoute, { replace: true }); setOriginalRoute('');
+  }, [currentUser]);
 
   async function handleLogin({ email, password }) {
     try {
@@ -150,9 +153,32 @@ function App() {
             <Route path='/signup' element={<Register onSubmit={handleRegister} />} />
           </Route>
           <Route element={<ProtectedRoute isAllowed={currentUser.name || false} redirectPath="/" />}>
-            <Route path='/movies' element={<><Header /><Movies onButtonClick={handleMoviesButton} savedMovies={savedMovies} /><Footer /></>} />
-            <Route path='/saved-movies' element={<><Header /><SavedMovies onButtonClick={handleSavedMoviesButton} savedMovies={savedMovies} /><Footer /></>} />
-            <Route path='/profile' element={<><Header /><Profile onLogout={doLogout} onSubmit={handleProfileChange} /></>} />
+            <Route
+              path='/movies'
+              element={
+                <>
+                  <Header />
+                  <Movies onButtonClick={handleMoviesButton} savedMovies={savedMovies} />
+                  <Footer />
+                </>}
+            />
+            <Route
+              path='/saved-movies'
+              element={
+                <>
+                  <Header />
+                  <SavedMovies onButtonClick={handleSavedMoviesButton} savedMovies={savedMovies} />
+                  <Footer />
+                </>
+              }
+            />
+            <Route path='/profile' element={
+              <>
+                <Header />
+                <Profile onLogout={doLogout} onSubmit={handleProfileChange} />
+              </>
+            }
+            />
           </Route>
           <Route path="*" element={<Page404 />} />
         </Routes>
