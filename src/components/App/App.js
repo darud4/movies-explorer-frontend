@@ -1,4 +1,4 @@
-import { Routes, Route, useNavigate } from 'react-router-dom';
+import { Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 import { useState, useCallback, useEffect } from 'react';
 import './App.css';
 import Main from '../Main/Main';
@@ -19,7 +19,9 @@ function App() {
 
   const [currentUser, setCurrentUser] = useState({ name: '', email: '' });
   const [savedMovies, setSavedMovies] = useState([]);
+  const [originalRoute, setOriginalRoute] = useState('');
 
+  const location = useLocation();
   const navigate = useNavigate();
 
   const getSavedMovies = useCallback(async () => {
@@ -42,15 +44,19 @@ function App() {
       mainApi.setToken(token);
       setCurrentUser({ name, email });
       getSavedMovies();
-//      navigate('/movies', { replace: true });
+      setOriginalRoute(location.pathname);
+      return true;
+      //      navigate('/movies', { replace: true });
     }
-    catch (error) { console.log(error) };
+    catch (error) { console.log(error); return false; };
   }, [getSavedMovies]);
 
   useEffect(() => {
     const jwt = localStorage.getItem('jwt');
     if (jwt) checkToken(jwt);
   }, [checkToken]);
+
+  useEffect(() => { if (currentUser.name && originalRoute) navigate(originalRoute); setOriginalRoute(''); }, [currentUser]);
 
   async function handleLogin({ email, password }) {
     try {
@@ -143,7 +149,7 @@ function App() {
             <Route path='/signin' element={<Login onSubmit={handleLogin} />} />
             <Route path='/signup' element={<Register onSubmit={handleRegister} />} />
           </Route>
-          <Route element={<ProtectedRoute isAllowed={currentUser.name} redirectPath="/" />}>
+          <Route element={<ProtectedRoute isAllowed={currentUser.name || false} redirectPath="/" />}>
             <Route path='/movies' element={<><Header /><Movies onButtonClick={handleMoviesButton} savedMovies={savedMovies} /><Footer /></>} />
             <Route path='/saved-movies' element={<><Header /><SavedMovies onButtonClick={handleSavedMoviesButton} savedMovies={savedMovies} /><Footer /></>} />
             <Route path='/profile' element={<><Header /><Profile onLogout={doLogout} onSubmit={handleProfileChange} /></>} />
