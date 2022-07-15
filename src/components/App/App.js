@@ -10,7 +10,6 @@ import Login from '../Login/Login';
 import Register from '../Register/Register';
 import Page404 from '../Page404/Page404';
 import Profile from '../Profile/Profile';
-import Popup from '../Popup/Popup';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import { mainApi } from '../../utils/MainApi';
@@ -18,13 +17,10 @@ import { doLogin, doSignup, checkToken as validateToken } from '../../utils/auth
 
 function App() {
 
-  const [isErrorPopup, setErrorPopup] = useState(false);
   const [currentUser, setCurrentUser] = useState({ name: '', email: '' });
   const [savedMovies, setSavedMovies] = useState([]);
 
   const navigate = useNavigate();
-
-  const closeErrorPopup = () => setErrorPopup(false);
 
   const getSavedMovies = useCallback(async () => {
     const result = await mainApi.getSavedMovies();
@@ -141,7 +137,6 @@ function App() {
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="page">
-        <Popup titleText="Какая-то ошибка" popupText="Текст какой-то ошбики" submitText="ОК" onClose={closeErrorPopup} isOpen={isErrorPopup} />
         <Routes>
           <Route path='/' element={<><Header theme="dark" /><Main /><Footer /></>} />
           <Route element={<ProtectedRoute isAllowed={!currentUser.name} redirectPath="/movies" />}>
