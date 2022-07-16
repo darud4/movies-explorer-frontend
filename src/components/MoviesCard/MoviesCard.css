@@ -10,12 +10,21 @@
   padding: 0;
 }
 
-.movies-card__image {
+.movies-card__img-link {
   grid-area: image;
+  position: relative;
+  padding-top: 50%;
+}
+
+.movies-card__image {
   object-fit: cover;
   object-position: center;
-  width: 100%;
   transition: opacity 0.3s ease;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
 }
 
 .movies-card__image:hover {
@@ -55,6 +64,7 @@
   background-position: center;
   transition: background-color 0.3s ease;
   border: 0;
+  cursor: pointer;
 }
 
 .movies-card__like:hover {

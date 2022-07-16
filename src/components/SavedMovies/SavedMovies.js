@@ -1,20 +1,17 @@
 import './SavedMovies.css'
-import SearchForm from '../Movies/SearchForm/SearchForm';
-import MoviesCardList from '../MoviesCardList/MoviesCardList';
-import image1 from '../../images/stopframe.png';
-import image2 from '../../images/stopframe1.png';
+import Filter from '../Filter/Filter';
 
-const defaultCards = [{ name: 'Когда я думаю о Германии ночью', image: image1 }, { name: 'Дженис: Маленькая девочка грустит', image: image2 },];
+function SavedMovies({ onButtonClick, savedMovies }) {
 
-function SavedMovies() {
     return <main className="saved-movies">
-        <SearchForm />
-        <MoviesCardList
-            buttonClassName='movies-card__like_remove'
-            movies={defaultCards}
+        <Filter
+            buttonClassName='movies-card__like movies-card__like_remove'
+            onButtonClick={onButtonClick}
+            movies={savedMovies}
+            showListOnMount={true}
+            noMore={true}
         />
     </main>
-
 }
 
 export default SavedMovies;

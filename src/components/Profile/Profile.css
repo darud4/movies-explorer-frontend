@@ -47,9 +47,24 @@
   text-decoration: underline;
 }
 
+.profile__button_disabled {
+  pointer-events: none;
+}
+
 .profile__button_attention {
   color: rgba(238, 52, 101, 1);
   font-weight: 500;
+}
+
+.profile__message {
+  color: rgba(238, 52, 101, 1);
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 16px;
+}
+
+.profile__message_success {
+  color: #2be080;
 }
 
 @media screen and (max-width: 768px) {

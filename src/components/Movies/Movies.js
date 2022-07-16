@@ -1,23 +1,51 @@
 import './Movies.css'
-import { useState } from 'react';
-import SearchForm from './SearchForm/SearchForm';
-import MoviesCardList from '../MoviesCardList/MoviesCardList';
-import More from './More/More';
-const defaultCards = [{ name: 'Когда я думаю о Германии ночью' }, { name: 'Дженис: Маленькая девочка грустит' }, { name: '33 слова о дизайне' }, { name: 'Дженис: Маленькая девочка грустит' }, { name: 'Дженис: Маленькая девочка грустит' }, { name: 'Баския: Взрыв реальности' }, { name: 'В погоне за Бенкси' }, { name: 'Киноальманах «100 лет дизайна»' },];
+import { useState, useEffect } from 'react';
+import Filter from '../Filter/Filter';
+import { moviesApi } from '../../utils/MoviesApi';
+import { CONFIG } from '../../config';
 
-function Movies({ buttonModifier = 'movies-card__like' }) {
+const { imgUrl } = CONFIG;
 
-    const [movies] = useState([...defaultCards]);
+function Movies({ onButtonClick, savedMovies }) {
+
+    const [movies, setMovies] = useState([]);
+    const [isPreloader, setPreloader] = useState(false);
+
+    useEffect(() => {
+        async function getMoviesList() {
+            setPreloader(true);
+            try {
+                const moviesList = await moviesApi.search();
+                const processed = moviesList.map(({ country, director, duration, year, description,
+                    trailerLink, nameRU, nameEN, id: movieId, image: imageObj }) =>
+                ({
+                    id: movieId, country, director, duration, year, description, trailerLink, nameRU, nameEN, movieId, image: `${imgUrl}${imageObj.url}`,
+                    thumbnail: `${imgUrl}${imageObj.formats.thumbnail.url}`
+                }));
+                setMovies(processed);
+            } catch (error) {
+                console.log('getMoviesList: ', error);
+            }
+            setPreloader(false);
+        }
+
+        getMoviesList();
+    }, []);
+
+    function getStyle(movieId) {
+        if (savedMovies.find(savedMovie => savedMovie.movieId === movieId)) return 'movies-card__like movies-card__like_active';
+        return 'movies-card__like';
+    }
 
     return (<main className="movies">
-        <SearchForm />
-        <MoviesCardList
+        <Filter
+            isBusy={isPreloader}
+            useLocalStorage={true}
+            buttonClassName={getStyle}
+            onButtonClick={onButtonClick}
             movies={movies}
-            buttonClassName={buttonModifier}
         />
-        <More isVisible={movies.length > 0} />
-    </main>);
-
+    </main >);
 }
 
 export default Movies;
