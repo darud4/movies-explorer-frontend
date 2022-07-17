@@ -17,6 +17,7 @@ function Filter({ movies, buttonClassName, onButtonClick, showListOnMount = fals
     useEffect(() => {
         if (showListOnMount && movies.length) {
             setFilteredMovies(movies);
+            if (searchString) handleSearch(searchString, isChecked);
         }
     }, [showListOnMount, movies]);
 
