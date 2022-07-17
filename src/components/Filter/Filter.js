@@ -17,6 +17,7 @@ function Filter({ movies, buttonClassName, onButtonClick, showListOnMount = fals
     useEffect(() => {
         if (showListOnMount && movies.length) {
             setFilteredMovies(movies);
+            if (searchString) handleSearch(searchString, isChecked);
         }
     }, [showListOnMount, movies]);
 
@@ -38,16 +39,9 @@ function Filter({ movies, buttonClassName, onButtonClick, showListOnMount = fals
         setSearchString(newVal);
     }
 
-    function pause() {
-        return new Promise((res, rej) => {
-            setTimeout(res, 200);
-        });
-    }
-
-    async function handleSearch(searchText, isShortMeter) {
+    function handleSearch(searchText, isShortMeter) {
         setPreloader(true);
         try {
-            await pause();
             const filtered = movies.filter(movie =>
                 ((isShortMeter && movie.duration < 41) || !isShortMeter)
                 && movie.nameRU.toLowerCase().includes(searchText.toLowerCase()));

@@ -1,34 +1,35 @@
 import './MoviesCardList.css';
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import MoviesCard from '../MoviesCard/MoviesCard';
 import More from './More/More';
 
 function MoviesCardList({ movies, buttonClassName, onButtonClick, noMore = false }) {
 
     const [moviesToShow, setMoviesToShow] = useState(0);
-
     const ref = useRef();
+
+    const getNumberOfColumns = useCallback(() => {
+        const columnsString = getComputedStyle(ref.current).getPropertyValue("grid-template-columns");
+        if (!columnsString) return;
+        return columnsString.split(' ').length;
+    }, []);
 
     useEffect(() => {
         function getInitialNumber() {
-            if (window.innerWidth >= 1280) return 12;
-            if (window.innerWidth >= 768) return 8;
-            return 5;
+            const columnsCount = getNumberOfColumns();
+            console.log(columnsCount);
+            return columnsCount > 1 ? columnsCount * 4 : 5;
         }
         if (movies.length === 0) return;
         if (noMore) setMoviesToShow(movies.length);
         else setMoviesToShow(Math.min(getInitialNumber(), movies.length));
-    }, [movies, noMore]);
+    }, [movies, noMore, getNumberOfColumns]);
 
-    const getMoviesToAdd = (columnsString) => {
-        if (!columnsString) return;
-        const columnsCount = columnsString.split(' ').length;
-        return Math.max(columnsCount, 2);
-    }
+    const getMoviesToAdd = () => Math.max(getNumberOfColumns(), 2);
 
     function handleMore() {
         if (moviesToShow === movies.length) return;
-        const moviesToAdd = getMoviesToAdd(getComputedStyle(ref.current).getPropertyValue("grid-template-columns"));
+        const moviesToAdd = getMoviesToAdd();
         setMoviesToShow(Math.min(moviesToShow + moviesToAdd, movies.length));
     }
 
