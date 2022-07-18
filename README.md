@@ -1,4 +1,4 @@
-# Учебный проект movies-explorer-frontend
+# Фронтенд учебного проекта movies-explorer
 
 ## О проекте
 
@@ -8,6 +8,15 @@
 Стек: HTML, CSS, React.JS
 
 [Репозиторий с бекендом проекта](https://github.com/darud4/movies-explorer-api)
+
+## Установка
+
+`git clone https://github.com/darud4/movies-explorer-frontend.git
+cd movies-explorer-frontend
+npm i
+npm start
+`
+## Посмотреть на проект
 
 Адрес проекта: https://darud-diploma.nomoreparties.sbs/
 
