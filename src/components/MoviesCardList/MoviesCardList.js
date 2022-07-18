@@ -17,7 +17,6 @@ function MoviesCardList({ movies, buttonClassName, onButtonClick, noMore = false
     useEffect(() => {
         function getInitialNumber() {
             const columnsCount = getNumberOfColumns();
-            console.log(columnsCount);
             return columnsCount > 1 ? columnsCount * 4 : 5;
         }
         if (movies.length === 0) return;
