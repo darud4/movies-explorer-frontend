@@ -9,7 +9,7 @@
 
 [Репозиторий с бекендом проекта](https://github.com/darud4/movies-explorer-api)
 
-## Установка
+## Установка фронтенда локально
 
 `git clone https://github.com/darud4/movies-explorer-frontend.git`  
 `cd movies-explorer-frontend`  
