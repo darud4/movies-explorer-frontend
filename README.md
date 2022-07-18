@@ -11,10 +11,10 @@
 
 ## Установка
 
-`git clone https://github.com/darud4/movies-explorer-frontend.git`
-`cd movies-explorer-frontend`
-`npm i`
-`npm start`
+`git clone https://github.com/darud4/movies-explorer-frontend.git`  
+`cd movies-explorer-frontend`  
+`npm i`  
+`npm start`  
 
 ## Посмотреть на проект
 
